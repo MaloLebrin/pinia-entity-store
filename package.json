@@ -1,0 +1,35 @@
+{
+  "name": "pinia-entity-store",
+  "version": "0.0.1",
+  "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
+  "author": {
+    "name": "Malo Lebrin",
+    "email": "malolebrin@gmail.com"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Pinia",
+    "orm",
+    "vue",
+    "vue3",
+    "typescript",
+    "database",
+    "normalizr",
+    "plugin",
+    "typed",
+    "ts",
+    "type"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "normalizr": "^3.6.1"
+  }
+}

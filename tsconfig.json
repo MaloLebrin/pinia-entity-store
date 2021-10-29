@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "lib": [
+      "ESNext",
+      "ESNext.AsyncIterable",
+      "DOM"
+    ],
+    "module": "commonjs",
+    "target": "es2015",
+    "declaration": true,
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+    },
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
