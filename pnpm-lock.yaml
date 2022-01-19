@@ -1,0 +1,23 @@
+lockfileVersion: 5.3
+
+specifiers:
+  normalizr: ^3.6.1
+  typescript: ^4.4.4
+
+dependencies:
+  normalizr: 3.6.1
+
+devDependencies:
+  typescript: 4.5.4
+
+packages:
+
+  /normalizr/3.6.1:
+    resolution: {integrity: sha512-8iEmqXmPtll8PwbEFrbPoDxVw7MKnNvt3PZzR2Xvq9nggEEOgBlNICPXYzyZ4w4AkHUzCU998mdatER3n2VaMA==}
+    dev: false
+
+  /typescript/4.5.4:
+    resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
