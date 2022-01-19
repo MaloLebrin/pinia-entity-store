@@ -96,16 +96,27 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     return state.entities.current
   }
 
+  function getOne(state = currentState) {
+    return (id: number) => state.entities.byId[id]
+  }
+
+  function getMany(state = currentState) {
+    return (ids: number[]) => ids.map(id => state.entities.byId[id])
+  }
+
+
   return {
-    findOneById,
     findManyById,
+    findOneById,
     getAll,
     getAllArray,
     getAllIds,
-    getWhere,
-    getWhereArray,
+    getCurrent,
     getIsEmpty,
     getIsNotEmpty,
-    getCurrent,
+    getMany,
+    getOne,
+    getWhere,
+    getWhereArray,
   }
 }
