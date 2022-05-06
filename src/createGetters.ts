@@ -1,5 +1,4 @@
 import { State, WithId } from "../types"
-import { noNull } from '@antfu/utils'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
@@ -114,7 +113,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   function isAlreadyInStore(state = currentState) {
-    return (id: number) => noNull(state.entities.byId[id])
+    return (id: number) => state.entities.allIds.includes(id)
   }
 
   function isAlreadyActive(state = currentState) {
