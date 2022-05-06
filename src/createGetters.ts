@@ -1,4 +1,4 @@
-import { State, WithId } from "../types"
+import type { State, WithId } from '../types'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
@@ -44,14 +44,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    */
   function getWhere(state = currentState) {
     return (filter: (arg: T) => boolean | null) => {
-      if (typeof filter !== 'function') {
+      if (typeof filter !== 'function')
         return state.entities.byId
-      }
+
       return state.entities.allIds.reduce((acc: Record<number, T>, id: number) => {
         const item = state.entities.byId[id]
-        if (!filter(item)) {
+        if (!filter(item))
           return acc
-        }
+
         acc[id] = item
         return acc
       }, {} as Record<number, T>)
@@ -64,14 +64,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    */
   function getWhereArray(state = currentState) {
     return (filter: (arg: T) => boolean | null) => {
-      if (typeof filter !== 'function') {
+      if (typeof filter !== 'function')
         return Object.values(state.entities.byId)
-      }
+
       return Object.values(state.entities.allIds.reduce((acc: Record<number, T>, id: number) => {
         const item = state.entities.byId[id]
-        if (!filter(item)) {
+        if (!filter(item))
           return acc
-        }
+
         acc[id] = item
         return acc
       }, {} as Record<number, T>))

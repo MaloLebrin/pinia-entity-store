@@ -18,12 +18,12 @@
     "paths": {
       "~/*": [
         "./*"
-      ],
+      ]
     },
     "types": [
       "vitest/globals",
-      "vite/client",
-    ],
+      "vite/client"
+    ]
   },
   "exclude": [
     "node_modules"

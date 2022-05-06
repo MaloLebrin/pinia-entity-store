@@ -4,8 +4,8 @@ import createGetters from './createGetters'
 import createActions from './createActions'
 
 export {
-	createEntity,
-	createState,
-	createGetters,
-	createActions,
+  createEntity,
+  createState,
+  createGetters,
+  createActions,
 }

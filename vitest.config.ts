@@ -12,5 +12,5 @@ export default defineConfig({
       imports: ['vitest'],
       dts: true, // generate TypeScript declaration
     }),
-  ]
+  ],
 })

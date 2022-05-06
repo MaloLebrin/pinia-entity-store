@@ -5,10 +5,10 @@ import { State } from './State'
 import { WithId } from './WithId'
 
 export {
-	BaseEntity,
-	ByIdParams,
-	FilterFn,
-	OptionalFilterFn,
-	State,
-	WithId,
+  BaseEntity,
+  ByIdParams,
+  FilterFn,
+  OptionalFilterFn,
+  State,
+  WithId,
 }
