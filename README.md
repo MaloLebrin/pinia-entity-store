@@ -4,8 +4,9 @@ A lightweight Pinia plugin to manage relational entities in Pinia without having
 ## Roadmap:
 
  * [x] Add is Already in store and Already active getters
- * [ ] Fully testing plugin  with [Vitest](https://vitest.dev/)
+ * [ ] Fully tested plugin  with [Vitest](https://vitest.dev/)
  * [ ] Make Pinia entity store as [plugin for Pinia](https://pinia.vuejs.org/core-concepts/plugins.html)
+ * [ ] Create documentation
 
 ## Contributions:
 
