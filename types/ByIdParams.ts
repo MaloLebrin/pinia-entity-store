@@ -1,4 +1,4 @@
 export interface ByIdParams<T> {
-	id: number,
-	payload: T,
+  id: number
+  payload: T
 }
