@@ -154,7 +154,7 @@ describe('createGetters Suite tests', () => {
 
   it('isAlreadyActive', () => {
     const userStore = useUserStore()
-    const { setActive, resetActive } = userStore
+    const { resetActive } = userStore
     expect(userStore.isAlreadyActive(user.id)).toBe(true)
     resetActive()
     expect(userStore.isAlreadyActive(user.id)).toBe(false)
