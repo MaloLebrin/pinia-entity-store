@@ -10,11 +10,11 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   /**
-   * Get multiple itesm from the state by their ids.
+   * Get multiple items from the state by their ids.
    * @param ids - The ids of items
    */
   function findManyById(state = currentState) {
-    return (ids: number[]) => ids.map(id => state.entities.byId[id])
+    return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
   }
 
   /**
@@ -101,7 +101,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   function getMany(state = currentState) {
-    return (ids: number[]) => ids.map(id => state.entities.byId[id])
+    return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
   }
 
   function getActive(state = currentState) {

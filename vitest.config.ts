@@ -9,8 +9,22 @@ export default defineConfig({
   },
   plugins: [
     AutoImport({
-      imports: ['vitest'],
-      dts: true, // generate TypeScript declaration
+      dts: './types/shims/auto-imports.d.ts',
+      imports: [
+        'vitest',
+        'pinia',
+        {
+          '@antfu/utils': [
+            'noNull',
+          ],
+        },
+      ],
     }),
   ],
+  resolve: {
+    alias: {
+      '@': './',
+    },
+  },
+
 })
