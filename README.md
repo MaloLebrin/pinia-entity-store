@@ -1,4 +1,4 @@
-# pinia-entity-store
+# Pinia-Entity-Store
 A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
 
 ## Roadmap:
@@ -24,3 +24,12 @@ The process described here has several goals:
 - Enable a sustainable system for pinia-entity-store's maintainers to review contributions
 
 You can create PR as your wish to fix bug, and create features
+
+
+## How to use It ?
+
+🔴 At the moment the package is not released yet, because it is still young.
+It has no published release.
+You can obviously make changes to contribute to the projects in order to advance the roadmap
+
+✅ However the features of Pinia Entity Store can be used without concern. However the features of Pinia Entity Store can be used without concern. They are tested and already used in some projects
