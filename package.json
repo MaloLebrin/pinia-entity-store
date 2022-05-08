@@ -23,7 +23,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
-    // "url": "https://github.com/MaloLebrin/pinia-entity-store"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
