@@ -1,4 +1,11 @@
-# Pinia-Entity-Store
+<div align="center" style="display:flex">
+  <h1 style="margin-right: 2rem">Pinia-Entity-Store </h1>
+  <a href="https://pinia.vuejs.org" target="_blank" rel="noopener noreferrer">
+    <img width="50" src="https://pinia.vuejs.org/logo.svg" alt="Pinia logo">
+  </a>
+</div>
+<br/>
+
 A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
 
 ## Roadmap:
