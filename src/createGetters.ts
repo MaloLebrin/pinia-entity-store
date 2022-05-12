@@ -92,30 +92,57 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     return state.entities.allIds.length > 0
   }
 
+  /**
+   * @return current entity stored in state
+   */
   function getCurrent(state = currentState) {
     return state.entities.current
   }
 
+  /**
+   * Get a single item from the state by its id.
+   * @param id - The id of the item
+   */
   function getOne(state = currentState) {
     return (id: number) => state.entities.byId[id]
   }
 
+  /**
+   * Get a array of items from the state by their ids.
+   * @param ids - ids of items
+   */
   function getMany(state = currentState) {
     return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
   }
 
+  /**
+   *  @return array of active entities stored in state
+   */
   function getActive(state = currentState) {
     return state.entities.active
   }
 
+  /**
+   *  @return first entity get from array of active entities stored in state
+   */
   function getFirstActive(state = currentState) {
     return state.entities.active[0]
   }
 
+  /**
+   * helper to determine if the entity is already stored in state
+   * @param id - The id of the item
+   *  @return boolean
+   */
   function isAlreadyInStore(state = currentState) {
     return (id: number) => state.entities.allIds.includes(id)
   }
 
+  /**
+   * helper to determine if the entity is already set as Active in state
+   * @param id - The id of the item
+   *  @return boolean
+   */
   function isAlreadyActive(state = currentState) {
     return (id: number) => state.entities.active.includes(id)
   }
