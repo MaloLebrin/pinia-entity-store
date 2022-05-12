@@ -35,7 +35,7 @@ You can obviously make changes to contribute to the projects in order to advance
 ✅ However the features of Pinia Entity Store can be used without concern. They are tested and already used in some projects
 
 
-## Create the state
+### Create the state
 
 ```ts
 // userState.ts
@@ -52,19 +52,17 @@ export const userState = createState<UserEntity>(userEntity)
 The state will look like this:
 
 ```ts
-entities: {
   entities: {
     byId: Record<number, UserEntity>,
     allIds: number[]
     current: UserEntity | null
     active: number[]
   }
-}
 ```
 
 You can of course extend the state as much and as you want.
 
-## Create the store
+### Create the store
 
  ⚠️ For the moment I have not managed to create a function to create actions as is the case for getters. You can of course contribute to the project by making PR.
 
@@ -133,6 +131,10 @@ export const useUserStore = defineStore('user', {
   }
 })
 ```
+
+## List of getters:
+
+
 
 
 ## License
