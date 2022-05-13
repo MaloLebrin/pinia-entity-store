@@ -11,7 +11,7 @@ A lightweight Pinia plugin to manage relational entities in Pinia without having
 ## Roadmap:
 
  * [x] Add is Already in store and Already active getters
- * [ ] Fully tested plugin  with [Vitest](https://vitest.dev/)
+ * [x] Fully tested plugin  with [Vitest](https://vitest.dev/)
  * [ ] Make Pinia entity store as [plugin for Pinia](https://pinia.vuejs.org/core-concepts/plugins.html)
  * [ ] Create documentation
  * [ ] Create offical release
@@ -71,7 +71,6 @@ You can of course extend the state as much and as you want.
 
 ### Create the store
 
- ⚠️ For the moment I have not managed to create a function to create actions as is the case for getters. You can of course contribute to the project by making PR.
 
 ```ts
 // useUserStore.ts
