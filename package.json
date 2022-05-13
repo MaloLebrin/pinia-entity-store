@@ -1,6 +1,6 @@
 {
   "name": "@MaloLebrin/pinia-entity-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
   "keywords": [
     "Pinia",

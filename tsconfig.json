@@ -7,7 +7,7 @@
       "DOM"
     ],
     "module": "commonjs",
-    "target": "es2015",
+    "target": "es2020",
     "declaration": true,
     "outDir": "./dist",
     "noImplicitAny": true,
@@ -26,6 +26,9 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.test.ts",
+    "**/test/**",
+    "**/coverage/**",
   ]
 }
