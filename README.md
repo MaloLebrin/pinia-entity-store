@@ -91,50 +91,12 @@ export const useUserStore = defineStore('user', {
 
   actions: {
     // Actions from Pinia-entity-store
-    createOne(payload: UserEntity): void {
-      this.entities.byId[payload.id] = payload
-      this.entities.allIds.push(payload.id)
-    },
-    createMany(payload: UserEntity[]) {
-      payload.forEach(entity => this.createOne(entity))
-    },
-    setCurrent(payload: UserEntity) {
-      this.entities.current = payload
-    },
-    removeCurrent() {
-      this.entities.current = null
-    },
-    updateOne(id: number, payload: UserEntity): void {
-      if (this.isAlreadyInStore(id)) {
-        const entity = this.entities.byId[id]
-        this.entities.byId[id] = {
-          ...entity,
-          ...payload,
-        }
-      }
-      else {
-        this.createOne(payload)
-      }
-    },
-    updateMany(payload: UserEntity[]): void {
-      payload.forEach(entity => this.updateOne(entity.id, entity))
-    },
-    deleteOne(id: number) {
-      delete this.entities.byId[id]
-      this.entities.allIds = this.entities.allIds.filter(entityId => entityId !== id)
-    },
-    deleteMany(ids: number[]) {
-      ids.forEach(id => this.deleteOne(id))
-    },
-    setActive(id: number) {
-      if (!this.isAlreadyActive(id))
-        this.entities.active.push(id)
-    },
-    resetActive() {
-      this.entities.active = []
-    },
+    ...createActions<UserEntity>(userState),
 
     // your customs actions bellow
+    resetState() {
+      this.$state = defaultState()
+    }
   }
 })
 ```
