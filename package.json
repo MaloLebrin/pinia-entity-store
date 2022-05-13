@@ -1,6 +1,6 @@
 {
   "name": "@MaloLebrin/pinia-entity-store",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
   "keywords": [
     "Pinia",
@@ -32,6 +32,9 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
+  },
+  "publishConfig": {
+    "@MaloLebrin:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "normalizr": "^3.6.1"
