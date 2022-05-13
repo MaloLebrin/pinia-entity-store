@@ -24,6 +24,7 @@ export default defineConfig({
     AutoImport({
       dts: './types/shims/auto-imports.d.ts',
       imports: [
+        'vue',
         'vitest',
         'pinia',
         {
