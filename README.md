@@ -6,6 +6,8 @@
 </div>
 <br/>
 
+[![Node.js Package](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml)
+
 A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
 
 ## Roadmap:
