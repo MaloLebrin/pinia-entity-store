@@ -17,6 +17,8 @@ export default defineConfig({
         '**/node_modules/**',
         '**/dist/**',
         '**/index.ts',
+        '**/dataFixtures.ts',
+        '**/store/**',
       ],
     },
   },
@@ -24,6 +26,7 @@ export default defineConfig({
     AutoImport({
       dts: './types/shims/auto-imports.d.ts',
       imports: [
+        'vue',
         'vitest',
         'pinia',
         {
