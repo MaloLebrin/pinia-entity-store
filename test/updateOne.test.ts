@@ -1,17 +1,16 @@
 import useUserStore from './store/userStore'
 import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user } from './utils/dataFixtures'
+import { getExpectedObjectProperties, usersArray } from './utils/dataFixtures'
 
-describe('create action should return correct value', () => {
+describe('updateOne action should return correct value', () => {
   beforeEach(() => {
     const app = createApp({})
     const pinia = createPinia()
     app.use(pinia)
     setActivePinia(pinia)
-    const { createMany } = useUserStore()
-    const userStore = useUserStore()
-    if (!userStore.isAlreadyInStore(user.id))
-      createMany([user])
+    const { updateMany } = useUserStore()
+
+    updateMany(usersArray)
   })
 
   it('getter current return correct value', () => {
@@ -23,10 +22,22 @@ describe('create action should return correct value', () => {
     const userStore = useUserStore()
 
     const userFinded = userStore.findOneById(1)
+    const userFinded2 = userStore.findOneById(2)
+    const usersArray = userStore.findManyById([1, 2])
 
     expect(userFinded).toBeDefined()
     expect(noNull(userFinded)).toBeTruthy()
     expect(getExpectedObjectProperties(userFinded)).toBeTruthy()
+
+    expect(userFinded2).toBeDefined()
+    expect(noNull(userFinded2)).toBeTruthy()
+    expect(getExpectedObjectProperties(userFinded2)).toBeTruthy()
+
+    expect(usersArray).toBeDefined()
+    expect(noNull(usersArray)).toBeTruthy()
+    usersArray.forEach((user) => {
+      expect(getExpectedObjectProperties(user)).toBeTruthy()
+    })
 
     const userNotFinded = userStore.findOneById(999)
     expect(userNotFinded).toBeUndefined()
@@ -47,13 +58,16 @@ describe('create action should return correct value', () => {
 
     expect(userStore.getAllArray).toBeDefined()
     expect(getExpectedObjectProperties(userStore.getAllArray[0])).toBeTruthy()
+    expect(isArray(userStore.getAllArray)).toBeTruthy()
+    expect(isArrayOfNumbers(userStore.getAllArray)).toBeFalsy()
+    expect(userStore.getAllArray).toHaveLength(2)
   })
 
   it('getter getAllIds return correct value', () => {
     const userStore = useUserStore()
 
     expect(userStore.getAllIds).toBeDefined()
-    expect(userStore.getAllIds).toHaveLength(1)
+    expect(userStore.getAllIds).toHaveLength(2)
     expect(userStore.getAllIds[0]).toBeDefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeTruthy()

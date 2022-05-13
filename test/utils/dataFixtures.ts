@@ -11,6 +11,18 @@ export const user = {
   lastName: 'test',
   companyName: 'test',
 }
+export const user2 = {
+  id: 2,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  email: 'test2@test.com',
+  token: 'test2',
+  firstName: 'test2',
+  lastName: 'test2',
+  companyName: 'test2',
+}
+
+export const usersArray: UserEntity[] = [user, user2]
 
 export function getExpectedObjectProperties(user: UserEntity) {
   return hasOwnProperty(user, 'id')
