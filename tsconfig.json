@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "moduleResolution": "Node",
-    "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable",
-      "DOM"
-    ],
-    "module": "commonjs",
-    "target": "es2020",
-    "declaration": true,
+    "target": "es2018",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "outDir": "./dist",
     "noImplicitAny": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "strict": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [
