@@ -8,7 +8,7 @@
 
 [![Node.js Package](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml)
 
-A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
+A fully typed lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
 
 ## Roadmap:
 
@@ -79,7 +79,6 @@ You can of course extend the state as much and as you want.
 
 import { userState } from '../utils/baseState'
 import type { UserEntity } from '../../types'
-import { createActions, createGetters } from '../../src'
 
 export const useUserStore = defineStore('user', {
   state: () => ({ ...userState }),
@@ -104,8 +103,42 @@ export const useUserStore = defineStore('user', {
 
 ## List of getters:
 
+- `findOneById(id: number)`: return an entity by it's id.
+- `findManyById(ids: number[])`: return array of entities.
+- `getAll`: return all entities as Record<number, Entity>
+- `getAllArray`: return all entities in the store as Entity[]
+- `getAllIds`: return all ids for entities in the store as number[]
+- `getWhere`: Get all the items that pass the given filter callback as a dictionnary of values.
+```ts
+const userStore = useUserStore()
+userStore.getWhere(user => user.lastName === 'Doe')
+```
 
+- `getWhereArray`: Get all the items that pass the given filter callback as an array of values
+```ts
+const userStore = useUserStore()
+userStore.getWhereArray(user => user.lastName === 'Doe')
+```
+- `getIsEmpty`: Return a boolean indicating wether or not the state is empty (contains no items).
+- `getIsNotEmpty`: Return a boolean indicating wether or not the state is not empty (contains items).
+- `getCurrent`: current entity stored in state.
+- `getActive`: array of active entities stored in state.
+- `getFirstActive`: first entity get from array of active entities stored in state.
+- `ìsAlreadyInStore(id: number)`: Return a boolean indicating wether or not the state contains entity.
+- `isAlreadyActive(id: number)`: Return a boolean indicating wether or not the active state contains entity.
 
+## List of actions:
+
+- `createOne`: create single entity in store
+- `createMany`: Create Many entity in store
+- `setCurrent`: setCurrent used entity
+- `removeCurrent`: remove current used entity
+- `updateOne`: update the entity in the store if it exists otherwise create the entity
+- `updateMany`: update many entities in the store if they exist otherwise create them
+- `deleteOne`: Delete one entity in Store
+- `deleteMany`: delete many entities in Store
+- `setActive`: add entity in active array
+- `resetActive`: remove all active entities
 
 ## License
 
