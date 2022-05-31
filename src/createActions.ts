@@ -28,7 +28,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
     },
 
     /**
-   * set current used entity
+   * remove current used entity
    * @param payload
    */
     removeCurrent() {
@@ -62,7 +62,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
     },
 
     /**
-   * Delete many entity in Store
+   * Delete one entity in Store
    * @param id of entity to delete
    */
     deleteOne(id: number) {
