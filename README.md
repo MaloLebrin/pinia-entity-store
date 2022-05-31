@@ -43,6 +43,21 @@ You can obviously make changes to contribute to the projects in order to advance
 
 ✅ However the features of Pinia Entity Store can be used without concern. They are tested and already used in some projects
 
+### Install package
+
+```
+npm i @malolebrin/pinia-entity-store
+
+// or
+
+yarn add @malolebrin/pinia-entity-store
+
+// or
+
+pnpm i @malolebrin/pinia-entity-store
+
+```
+
 
 ### Create the state
 
