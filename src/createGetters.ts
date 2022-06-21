@@ -4,6 +4,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   /**
    * Get a single item from the state by its id.
    * @param id - The id of the item
+   * @Deprecated use getOne
    */
   function findOneById(state = currentState) {
     return (id: number) => state.entities.byId[id]
@@ -12,6 +13,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   /**
    * Get multiple items from the state by their ids.
    * @param ids - The ids of items
+   * @Deprecated use getMany
    */
   function findManyById(state = currentState) {
     return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
