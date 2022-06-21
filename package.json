@@ -28,6 +28,9 @@
     "type": "git",
     "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -35,7 +38,10 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "normalizr": "^3.6.2"
