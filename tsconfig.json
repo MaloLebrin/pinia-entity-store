@@ -25,17 +25,7 @@
     },
     "types": [
       "vitest/globals",
-      "vite/client"
+      "vite/client",
     ]
   },
-  "include": [
-    "./src/**/*",
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts",
-    "**/test/**",
-    "**/coverage/**",
-    "./types/**/*"
-  ]
 }

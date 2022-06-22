@@ -69,6 +69,13 @@ describe('create action should return correct value', () => {
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeTruthy()
   })
 
+  it('getter getMissingIds return correct value', () => {
+    const userStore = useUserStore()
+
+    const ids = [1, 2]
+    expect(userStore.getMissingIds(ids)).toEqual([1])
+  })
+
   it('getter getwhereArray return correct value', () => {
     const userStore = useUserStore()
 
