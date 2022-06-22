@@ -1,9 +1,11 @@
+import { uniq } from '@antfu/utils'
 import type { State, WithId } from '../types'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
    * Get a single item from the state by its id.
    * @param id - The id of the item
+   * @Deprecated use getOne
    */
   function findOneById(state = currentState) {
     return (id: number) => state.entities.byId[id]
@@ -12,6 +14,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   /**
    * Get multiple items from the state by their ids.
    * @param ids - The ids of items
+   * @Deprecated use getMany
    */
   function findManyById(state = currentState) {
     return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
@@ -36,6 +39,21 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    */
   function getAllIds(state = currentState) {
     return state.entities.allIds
+  }
+
+  /**
+   * @param ids number[]
+   * @paramc anHaveDuplicates boolean not required
+   * @returns returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
+   */
+  function getMissingIds(state = currentState) {
+    return (ids: number[], canHaveDuplicates?: boolean) => {
+      const filteredIds = ids.filter(id => state.entities.allIds.includes(id))
+      if (!canHaveDuplicates)
+        return uniq(filteredIds)
+
+      return filteredIds
+    }
   }
 
   /**
@@ -159,6 +177,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     getIsEmpty,
     getIsNotEmpty,
     getMany,
+    getMissingIds,
     getOne,
     getWhere,
     getWhereArray,

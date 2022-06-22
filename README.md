@@ -118,8 +118,6 @@ export const useUserStore = defineStore('user', {
 
 ## List of getters:
 
-- `findOneById(id: number)`: return an entity by it's id.
-- `findManyById(ids: number[])`: return array of entities.
 - `getAll`: return all entities as Record<number, Entity>
 - `getAllArray`: return all entities in the store as Entity[]
 - `getAllIds`: return all ids for entities in the store as number[]

@@ -2,6 +2,11 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
+    // "module": "commonjs",
+    // "target": "es2018",
+    // "target": "es5",
+    // "module": "commonjs",
+    "declaration": true,
     "lib": ["esnext"],
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -20,13 +25,7 @@
     },
     "types": [
       "vitest/globals",
-      "vite/client"
+      "vite/client",
     ]
   },
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts",
-    "**/test/**",
-    "**/coverage/**",
-  ]
 }

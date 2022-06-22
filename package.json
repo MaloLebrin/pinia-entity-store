@@ -1,7 +1,7 @@
 {
   "name": "@malolebrin/pinia-entity-store",
   "private": false,
-  "version": "0.0.8",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -28,14 +28,19 @@
     "type": "git",
     "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "normalizr": "^3.6.2"
