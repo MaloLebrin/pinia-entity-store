@@ -118,9 +118,14 @@ export const useUserStore = defineStore('user', {
 
 ## List of getters:
 
+
+- `getOne`: return a single item from the state by its id.
+- `getMany`: return a array of items from the state by their ids.
 - `getAll`: return all entities as Record<number, Entity>
 - `getAllArray`: return all entities in the store as Entity[]
 - `getAllIds`: return all ids for entities in the store as number[]
+- `getMissingIds`: returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
+
 - `getWhere`: Get all the items that pass the given filter callback as a dictionnary of values.
 ```ts
 const userStore = useUserStore()
