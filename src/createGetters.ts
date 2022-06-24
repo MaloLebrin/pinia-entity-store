@@ -43,12 +43,12 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
 
   /**
    * @param ids number[]
-   * @paramc anHaveDuplicates boolean not required
+   * @param canHaveDuplicates boolean not required
    * @returns returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
    */
   function getMissingIds(state = currentState) {
     return (ids: number[], canHaveDuplicates?: boolean) => {
-      const filteredIds = ids.filter(id => state.entities.allIds.includes(id))
+      const filteredIds = ids.filter(id => !state.entities.allIds.includes(id))
       if (!canHaveDuplicates)
         return uniq(filteredIds)
 

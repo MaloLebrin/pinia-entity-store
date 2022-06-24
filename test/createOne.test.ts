@@ -73,7 +73,7 @@ describe('create action should return correct value', () => {
     const userStore = useUserStore()
 
     const ids = [1, 2]
-    expect(userStore.getMissingIds(ids)).toEqual([1])
+    expect(userStore.getMissingIds(ids)).toEqual([2])
   })
 
   it('getter getwhereArray return correct value', () => {
