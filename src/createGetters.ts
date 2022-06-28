@@ -57,6 +57,19 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   /**
+  * @param entitiesArray T[]
+  * @returns returns a list of missing entities in the store
+  */
+  function getMissingEntities(state = currentState) {
+    return (entitiesArray: T[]) => {
+      if (entitiesArray?.length > 0)
+        return entitiesArray.filter(entity => !state.entities.allIds.includes(entity.id))
+
+      return []
+    }
+  }
+
+  /**
    * Get all the items that pass the given filter callback as a dictionnary of values.
    * @param filter - The filtering callback that will be used to filter the items.
    */
@@ -177,6 +190,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     getIsEmpty,
     getIsNotEmpty,
     getMany,
+    getMissingEntities,
     getMissingIds,
     getOne,
     getWhere,
