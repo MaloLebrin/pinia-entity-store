@@ -1,6 +1,6 @@
 import useUserStore from './store/userStore'
 import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user } from './utils/dataFixtures'
+import { getExpectedObjectProperties, user, user2, usersArray } from './utils/dataFixtures'
 
 describe('create action should return correct value', () => {
   beforeEach(() => {
@@ -74,6 +74,12 @@ describe('create action should return correct value', () => {
 
     const ids = [1, 2]
     expect(userStore.getMissingIds(ids)).toEqual([2])
+  })
+
+  it('getter getMissingEntities return correct value', () => {
+    const userStore = useUserStore()
+
+    expect(userStore.getMissingEntities(usersArray)).toEqual([user2])
   })
 
   it('getter getwhereArray return correct value', () => {
