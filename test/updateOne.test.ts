@@ -1,6 +1,6 @@
 import useUserStore from './store/userStore'
 import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, usersArray } from './utils/dataFixtures'
+import { getExpectedObjectProperties, user2, usersArray } from './utils/dataFixtures'
 
 describe('updateOne action should return correct value', () => {
   beforeEach(() => {
@@ -71,6 +71,21 @@ describe('updateOne action should return correct value', () => {
     expect(userStore.getAllIds[0]).toBeDefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeTruthy()
+  })
+
+  it('getter getMissingIds return correct value', () => {
+    const userStore = useUserStore()
+
+    const ids = [1, 2, 3]
+    expect(userStore.getMissingIds(ids)).toEqual([3])
+    expect(userStore.getMissingIds(ids)).toHaveLength(1)
+  })
+
+  it('getter getMissingEntities return correct value', () => {
+    const userStore = useUserStore()
+
+    expect(userStore.getMissingEntities(usersArray)).toEqual([])
+    expect(userStore.getMissingEntities(usersArray)).toHaveLength(0)
   })
 
   it('getter getwhereArray return correct value', () => {

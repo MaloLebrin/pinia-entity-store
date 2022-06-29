@@ -1,6 +1,6 @@
 import useUserStore from './store/userStore'
 import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user } from './utils/dataFixtures'
+import { getExpectedObjectProperties, user, user2, usersArray } from './utils/dataFixtures'
 
 describe('delete action should return correct value', () => {
   beforeEach(() => {
@@ -54,6 +54,19 @@ describe('delete action should return correct value', () => {
     expect(userStore.getAllIds[0]).toBeUndefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeFalsy()
+  })
+
+  it('getter getMissingIds return correct value', () => {
+    const userStore = useUserStore()
+
+    const ids = [1, 2]
+    expect(userStore.getMissingIds(ids)).toEqual(ids)
+  })
+
+  it('getter getMissingEntities return correct value', () => {
+    const userStore = useUserStore()
+
+    expect(userStore.getMissingEntities(usersArray)).toEqual([user, user2])
   })
 
   it('getter getwhere return correct value', () => {
