@@ -64,7 +64,7 @@ pnpm i @malolebrin/pinia-entity-store
 ```ts
 // userState.ts
 
-import { createEntity, createState  } from '@malolebrin/pinia-entity-store'
+import { createEntity, createState } from '@malolebrin/pinia-entity-store'
 import type { UserEntity } from '~/types'
 
 export const userEntity = createEntity<UserEntity>('user')
@@ -90,9 +90,9 @@ You can of course extend the state as much and as you want.
 
 ```ts
 // useUserStore.ts
-import { createGetters, createActions  } from '@malolebrin/pinia-entity-store'
-import { userState } from './userState.ts'
+import { createActions, createGetters } from '@malolebrin/pinia-entity-store'
 import type { UserEntity } from '../../types'
+import { userState } from './userState.ts'
 
 export const useUserStore = defineStore('user', {
   state: () => ({ ...userState }),

@@ -35,7 +35,7 @@ describe('updateOne action should return correct value', () => {
 
     expect(usersArray).toBeDefined()
     expect(noNull(usersArray)).toBeTruthy()
-    usersArray.forEach((user) => {
+    usersArray.forEach(user => {
       expect(getExpectedObjectProperties(user)).toBeTruthy()
     })
 

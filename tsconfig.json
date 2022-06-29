@@ -21,8 +21,8 @@
     },
     "types": [
       "vitest/globals",
-      "vite/client",
-    ],
+      "vite/client"
+    ]
   },
   "exclude": [
     "test/**/*",

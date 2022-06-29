@@ -1,11 +1,20 @@
 {
   "name": "@malolebrin/pinia-entity-store",
-  "private": false,
   "version": "0.1.3",
+  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
+  "author": {
+    "name": "Malo Lebrin",
+    "email": "malolebrin@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
+  },
   "keywords": [
     "Pinia",
     "orm",
@@ -19,20 +28,11 @@
     "ts",
     "type"
   ],
-  "license": "MIT",
-  "author": {
-    "name": "Malo Lebrin",
-    "email": "malolebrin@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
-  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist/**/*"
   ],
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "vitest",
@@ -50,11 +50,11 @@
     "@antfu/utils": "^0.5.2",
     "c8": "^7.11.3",
     "eslint": "^8.17.0",
+    "pinia": "^2.0.14",
     "typescript": "^4.7.3",
     "unplugin-auto-import": "^0.8.7",
     "vite": "^2.9.9",
     "vitest": "^0.10.5",
-    "pinia": "^2.0.14",
     "vue": "^3.2.36"
   }
 }
