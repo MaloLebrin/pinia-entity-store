@@ -1,7 +1,6 @@
-import type { BaseEntity, State } from '../types'
+import type { State } from '../types'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function <T>(entity: BaseEntity<T>): State<T> {
+export default function <T>(): State<T> {
   return {
     entities: {
       byId: {},

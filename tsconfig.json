@@ -25,8 +25,8 @@
     ]
   },
   "exclude": [
-    "test/**/*",
-    "test/**/*.test.ts",
-    "test/**/*.ts"
+    // "test/**/*",
+    // "test/**/*.test.ts",
+    // "test/**/*.ts"
   ]
 }

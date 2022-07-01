@@ -38,7 +38,7 @@ You can create PR as your wish to fix bug, and create features
 ## How to use It ?
 
 🔴 At the moment the package is not released yet, because it is still young.
-It has no published release.
+It has no published release on github.
 You can obviously make changes to contribute to the projects in order to advance the roadmap
 
 ✅ However the features of Pinia Entity Store can be used without concern. They are tested and already used in some projects
@@ -64,12 +64,10 @@ pnpm i @malolebrin/pinia-entity-store
 ```ts
 // userState.ts
 
-import { createEntity, createState } from '@malolebrin/pinia-entity-store'
+import { createState } from '@malolebrin/pinia-entity-store'
 import type { UserEntity } from '~/types'
 
-export const userEntity = createEntity<UserEntity>('user')
-
-export const userState = createState<UserEntity>(userEntity)
+export const userState = createState<UserEntity>()
 ```
 
 The state will look like this:
@@ -124,7 +122,7 @@ export const useUserStore = defineStore('user', {
 - `getAllArray`: return all entities in the store as Entity[]
 - `getAllIds`: return all ids for entities in the store as number[]
 - `getMissingIds`: returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
-
+- `getMissingEntities`: returns a list of missing entities in the store compared to the entities passed to the getter.
 - `getWhere`: Get all the items that pass the given filter callback as a dictionnary of values.
 ```ts
 const userStore = useUserStore()

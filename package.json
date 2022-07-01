@@ -42,9 +42,6 @@
     "prepare": "npm run build",
     "postversion": "git push && git push --tags"
   },
-  "dependencies": {
-    "normalizr": "^3.6.2"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.1",
     "@antfu/utils": "^0.5.2",
