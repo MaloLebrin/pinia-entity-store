@@ -1,4 +1,5 @@
 import type { State, WithId } from '../types'
+// import type {  } from 'pinia'
 
 export default function createActions<T extends WithId>(state: State<T>) {
   return {
@@ -54,9 +55,9 @@ export default function createActions<T extends WithId>(state: State<T>) {
           ...state.entities.byId[id],
           ...payload,
         }
-      }
-      else {
-        this.createOne(payload)
+      } else {
+        state.entities.byId[payload.id] = payload
+        state.entities.allIds.push(payload.id)
       }
     },
 
