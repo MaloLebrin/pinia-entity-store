@@ -28,12 +28,13 @@
     "ts",
     "type"
   ],
-  "main": "dist/src/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "build": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
