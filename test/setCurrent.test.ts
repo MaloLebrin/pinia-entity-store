@@ -18,15 +18,13 @@ describe('setCurrent action should return correct value', () => {
 
     expect(noNull(userStore.getCurrent)).toBeTruthy()
 
-    if (noNull(userStore.getCurrent)) {
-      expect(getExpectedObjectProperties(userStore.getCurrent)).toBeTruthy()
-      expect(userStore.getCurrent.id).toBe(1)
-      expect(userStore.getCurrent.email).toBe(user.email)
-      expect(userStore.getCurrent.token).toBe(user.token)
-      expect(userStore.getCurrent.firstName).toBe(user.firstName)
-      expect(userStore.getCurrent.lastName).toBe(user.lastName)
-      expect(userStore.getCurrent.companyName).toBe(user.companyName)
-    }
+    expect(getExpectedObjectProperties(userStore.getCurrent)).toBeTruthy()
+    expect(userStore.getCurrent.id).toBe(1)
+    expect(userStore.getCurrent.email).toBe(user.email)
+    expect(userStore.getCurrent.token).toBe(user.token)
+    expect(userStore.getCurrent.firstName).toBe(user.firstName)
+    expect(userStore.getCurrent.lastName).toBe(user.lastName)
+    expect(userStore.getCurrent.companyName).toBe(user.companyName)
   })
 
   it('getter findOneById return correct value', () => {
