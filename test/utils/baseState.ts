@@ -1,5 +1,5 @@
 import createState from '../../src/createState'
-import type { UserEntity } from '~/types'
+import type { UserEntity } from '../store/Store'
 
 export const userState = defaultState()
 

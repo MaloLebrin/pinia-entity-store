@@ -1,4 +1,4 @@
-import type { State } from '../types'
+import type { State } from './index'
 
 export default function <T>(): State<T> {
   return {

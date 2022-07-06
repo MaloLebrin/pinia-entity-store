@@ -1,4 +1,4 @@
-import type { State, WithId } from '../types'
+import type { State, WithId } from './index'
 
 export default function createActions<T extends WithId>(state: State<T>) {
   return {

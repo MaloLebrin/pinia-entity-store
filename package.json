@@ -1,6 +1,6 @@
 {
   "name": "@malolebrin/pinia-entity-store",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -29,7 +29,7 @@
     "type"
   ],
   "main": "dist/src/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist/**/*"
   ],

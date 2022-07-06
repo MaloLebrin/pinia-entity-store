@@ -1,5 +1,5 @@
 import { hasOwnProperty } from '@antfu/utils'
-import type { UserEntity } from '~/types'
+import type { UserEntity } from '../store/Store'
 
 export const user = {
   id: 1,
