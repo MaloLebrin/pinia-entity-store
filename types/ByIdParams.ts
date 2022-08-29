@@ -1,4 +1,6 @@
+import type { Id } from './WithId'
+
 export interface ByIdParams<T> {
-  id: number
+  id: Id
   payload: T
 }
