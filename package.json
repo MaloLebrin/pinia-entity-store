@@ -35,6 +35,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "type:check": "tsc --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint .",
