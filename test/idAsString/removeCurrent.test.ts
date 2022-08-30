@@ -1,6 +1,6 @@
-import useUserStore from './store/userStore'
-import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user } from './utils/dataFixtures'
+import useUserStore from '../store/userStore'
+import { isArray, isArrayOfNumbers } from '../utils/array'
+import { convertIdToString, getExpectedObjectProperties, user, userIdString } from '../utils/dataFixtures'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('setCurrent action should return correct value', () => {
     setActivePinia(pinia)
     const { setCurrent, removeCurrent } = useUserStore()
 
-    setCurrent(user)
+    setCurrent(convertIdToString(user))
     removeCurrent()
   })
 
@@ -22,16 +22,16 @@ describe('setCurrent action should return correct value', () => {
   it('getter findOneById return correct value', () => {
     const userStore = useUserStore()
 
-    expect(userStore.findOneById(1)).toBeUndefined()
+    expect(userStore.findOneById(userIdString)).toBeUndefined()
 
-    const userFinded = userStore.findOneById(1)
+    const userFinded = userStore.findOneById(userIdString)
     expect(userFinded).toBeUndefined()
     expect(noNull(userFinded)).toBeTruthy()
     expect(getExpectedObjectProperties(userFinded)).toBeFalsy()
 
-    const userNotFinded = userStore.findOneById(999)
-    expect(userNotFinded).toBeUndefined()
-    expect(getExpectedObjectProperties(userNotFinded)).toBeFalsy()
+    const userNotFound = userStore.findOneById('999')
+    expect(userNotFound).toBeUndefined()
+    expect(getExpectedObjectProperties(userNotFound)).toBeFalsy()
   })
 
   it('getter getAll return correct value', () => {
@@ -39,8 +39,8 @@ describe('setCurrent action should return correct value', () => {
 
     expect(userStore.getAll).toBeDefined()
     expect(typeof userStore.getAll).toBe('object')
-    expect(userStore.getAll[1]).toBeUndefined()
-    expect(getExpectedObjectProperties(userStore.getAll[1])).toBeFalsy()
+    expect(userStore.getAll[userIdString]).toBeUndefined()
+    expect(getExpectedObjectProperties(userStore.getAll[userIdString])).toBeFalsy()
   })
 
   it('getter getAllArray return correct value', () => {
@@ -64,14 +64,14 @@ describe('setCurrent action should return correct value', () => {
   it('getter getwhere return correct value', () => {
     const userStore = useUserStore()
 
-    const usersFinded = userStore.getWhere(user => user.id === 1)
-    expect(getExpectedObjectProperties(usersFinded[1])).toBeFalsy()
+    const usersFinded = userStore.getWhere(user => user.id === userIdString)
+    expect(getExpectedObjectProperties(usersFinded[userIdString])).toBeFalsy()
   })
 
   it('getter getwhereArray return correct value', () => {
     const userStore = useUserStore()
 
-    const usersFinded = userStore.getWhereArray(user => user.id === 1)
+    const usersFinded = userStore.getWhereArray(user => user.id === userIdString)
     expect(usersFinded).toBeDefined()
     expect(usersFinded).toHaveLength(0)
     expect(isArray(usersFinded)).toBeTruthy()
@@ -88,10 +88,10 @@ describe('setCurrent action should return correct value', () => {
   it('getter getOne return correct value', () => {
     const userStore = useUserStore()
 
-    expect(userStore.getOne(1)).toBeUndefined()
-    expect(getExpectedObjectProperties(userStore.getOne(1))).toBeFalsy()
-    expect(userStore.getOne(999)).toBeUndefined()
-    expect(userStore.getOne(1)).toBeUndefined()
+    expect(userStore.getOne(userIdString)).toBeUndefined()
+    expect(getExpectedObjectProperties(userStore.getOne(userIdString))).toBeFalsy()
+    expect(userStore.getOne('999')).toBeUndefined()
+    expect(userStore.getOne(userIdString)).toBeUndefined()
   })
 
   it('getActive return correct value', () => {

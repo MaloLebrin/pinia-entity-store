@@ -1,8 +1,7 @@
 import { hasOwnProperty } from '@antfu/utils'
-import { userState } from './utils/baseState'
+import { userState } from '../utils/baseState'
 
 describe('createState suite tests', () => {
-
   it('createState ownProperty of an state by default', () => {
     expect(hasOwnProperty(userState, 'entities')).toBeTruthy()
 

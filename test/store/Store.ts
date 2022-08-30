@@ -1,5 +1,7 @@
+import type { Id } from '~/types/WithId'
+
 export interface BaseStoreEntity {
-  readonly id: number
+  readonly id: Id
   readonly createdAt: Date
   readonly updatedAt: Date
 }

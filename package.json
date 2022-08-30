@@ -1,6 +1,6 @@
 {
   "name": "@malolebrin/pinia-entity-store",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,8 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
+    "type:check": "tsc --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint .",

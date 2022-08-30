@@ -1,4 +1,5 @@
 import type { State, WithId } from './index'
+import type { Id } from '~/types/WithId'
 
 export default function createActions<T extends WithId>(state: State<T>) {
   return {
@@ -48,7 +49,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
      * @param id of entity to update
      * @param payload data of entity to update
      */
-    updateOne(id: number, payload: T): void {
+    updateOne(id: Id, payload: T): void {
       if (state.entities.byId[id]) {
         state.entities.byId[id] = {
           ...state.entities.byId[id],
@@ -73,7 +74,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
    * Delete one entity in Store
    * @param id of entity to delete
    */
-    deleteOne(id: number) {
+    deleteOne(id: Id) {
       delete state.entities.byId[id]
       state.entities.allIds = state.entities.allIds.filter(entityId => entityId !== id)
     },
@@ -82,7 +83,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
    * delete many entities in Store
    * @param ids of entities to delete
    */
-    deleteMany(ids: number[]) {
+    deleteMany(ids: Id[]) {
       ids.forEach(id => this.deleteOne(id))
     },
 
@@ -90,7 +91,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
       state.entities.active = []
     },
 
-    setActive(id: number) {
+    setActive(id: Id) {
       if (!state.entities.active.includes(id))
         state.entities.active.push(id)
     },

@@ -1,5 +1,6 @@
 import { uniq } from '@antfu/utils'
 import type { State, WithId } from './index'
+import type { Id } from '~/types/WithId'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
@@ -8,7 +9,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    * @Deprecated use getOne
    */
   function findOneById(state = currentState) {
-    return (id: number) => state.entities.byId[id]
+    return (id: Id) => state.entities.byId[id]
   }
 
   /**
@@ -17,7 +18,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    * @Deprecated use getMany
    */
   function findManyById(state = currentState) {
-    return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
+    return (ids: Id[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
   }
 
   /**
@@ -42,12 +43,12 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   /**
-   * @param ids number[]
+   * @param ids Id[]
    * @param canHaveDuplicates boolean not required
    * @returns returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
    */
   function getMissingIds(state = currentState) {
-    return (ids: number[], canHaveDuplicates?: boolean) => {
+    return (ids: Id[], canHaveDuplicates?: boolean) => {
       const filteredIds = ids.filter(id => !state.entities.allIds.includes(id))
       if (!canHaveDuplicates)
         return uniq(filteredIds)
@@ -78,14 +79,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return state.entities.byId
 
-      return state.entities.allIds.reduce((acc: Record<number, T>, id: number) => {
+      return state.entities.allIds.reduce((acc: Record<Id, T>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<number, T>)
+      }, {} as Record<Id, T>)
     }
   }
 
@@ -98,14 +99,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return Object.values(state.entities.byId)
 
-      return Object.values(state.entities.allIds.reduce((acc: Record<number, T>, id: number) => {
+      return Object.values(state.entities.allIds.reduce((acc: Record<Id, T>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<number, T>))
+      }, {} as Record<Id, T>))
     }
   }
 
@@ -135,7 +136,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    * @param id - The id of the item
    */
   function getOne(state = currentState) {
-    return (id: number) => state.entities.byId[id]
+    return (id: Id) => state.entities.byId[id]
   }
 
   /**
@@ -143,7 +144,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    * @param ids - ids of items
    */
   function getMany(state = currentState) {
-    return (ids: number[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
+    return (ids: Id[]) => ids.map(id => state.entities.byId[id]).filter(id => id)
   }
 
   /**
@@ -166,7 +167,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    *  @return boolean
    */
   function isAlreadyInStore(state = currentState) {
-    return (id: number) => state.entities.allIds.includes(id)
+    return (id: Id) => state.entities.allIds.includes(id)
   }
 
   /**
@@ -175,7 +176,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
    *  @return boolean
    */
   function isAlreadyActive(state = currentState) {
-    return (id: number) => state.entities.active.includes(id)
+    return (id: Id) => state.entities.active.includes(id)
   }
 
   return {
