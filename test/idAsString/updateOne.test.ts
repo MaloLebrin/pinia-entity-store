@@ -39,9 +39,9 @@ describe('updateOne action should return correct value', () => {
       expect(getExpectedObjectProperties(user)).toBeTruthy()
     })
 
-    const userNotFinded = userStore.findOneById('999')
-    expect(userNotFinded).toBeUndefined()
-    expect(getExpectedObjectProperties(userNotFinded)).toBeFalsy()
+    const userNotFound = userStore.findOneById('999')
+    expect(userNotFound).toBeUndefined()
+    expect(getExpectedObjectProperties(userNotFound)).toBeFalsy()
   })
 
   it('getter getAll return correct value', () => {
