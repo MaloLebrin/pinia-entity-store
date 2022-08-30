@@ -1,6 +1,6 @@
 import useUserStore from './store/userStore'
 import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user2, usersArray } from './utils/dataFixtures'
+import { getExpectedObjectProperties, usersArray } from './utils/dataFixtures'
 
 describe('updateOne action should return correct value', () => {
   beforeEach(() => {
