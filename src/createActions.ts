@@ -132,6 +132,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
     updateField<K extends keyof T>(field: K, value: (T & { $isDirty: boolean })[K], id: Id) {
       if (state.entities.byId[id]) {
         state.entities.byId[id][field] = value
+        this.setIsDirty(id)
       }
     },
   }
