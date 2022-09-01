@@ -80,14 +80,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return state.entities.byId
 
-      return state.entities.allIds.reduce((acc: Record<Id, CreatedEntity<T>>, id: Id) => {
+      return state.entities.allIds.reduce((acc: Record<Id, T & { $isDirty: boolean }>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<Id, CreatedEntity<T>>)
+      }, {} as Record<Id, T & { $isDirty: boolean }>)
     }
   }
 
@@ -100,14 +100,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return Object.values(state.entities.byId)
 
-      return Object.values(state.entities.allIds.reduce((acc: Record<Id, CreatedEntity<T>>, id: Id) => {
+      return Object.values(state.entities.allIds.reduce((acc: Record<Id, T & { $isDirty: boolean }>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<Id, CreatedEntity<T>>))
+      }, {} as Record<Id, T & { $isDirty: boolean }>))
     }
   }
 
