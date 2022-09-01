@@ -1,7 +1,6 @@
 import { uniq } from '@antfu/utils'
 import type { State } from './index'
 import type { Id, WithId } from '~/types/WithId'
-import type { CreatedEntity } from '~/types/State'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
