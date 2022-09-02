@@ -1,6 +1,6 @@
-import type { State } from './index'
+import type { State, WithId } from './index'
 
-export default function <T>(): State<T> {
+export default function <T extends WithId>(): State<T & { $isDirty: boolean }> {
   return {
     entities: {
       byId: {},

@@ -1,5 +1,5 @@
-import type { State, WithId } from './index'
-import type { Id } from '~/types/WithId'
+import type { State } from './index'
+import type { Id, WithId } from '~/types/WithId'
 
 export default function createActions<T extends WithId>(state: State<T>) {
   return {
@@ -13,9 +13,10 @@ export default function createActions<T extends WithId>(state: State<T>) {
           ...state.entities.byId[payload.id],
           ...payload,
         }
+        this.setIsDirty(payload.id)
       }
       else {
-        state.entities.byId[payload.id] = payload
+        state.entities.byId[payload.id] = { ...payload, $isDirty: false }
         state.entities.allIds.push(payload.id)
       }
     },
@@ -33,7 +34,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
      * @param payload
      */
     setCurrent(payload: T) {
-      state.entities.current = payload
+      state.entities.current = { ...payload, $isDirty: false }
     },
 
     /**
@@ -55,6 +56,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
           ...state.entities.byId[id],
           ...payload,
         }
+        this.setIsDirty(id)
       }
       else {
         this.createOne(payload)
@@ -94,6 +96,44 @@ export default function createActions<T extends WithId>(state: State<T>) {
     setActive(id: Id) {
       if (!state.entities.active.includes(id))
         state.entities.active.push(id)
+    },
+
+    /**
+   * set $isDirty property to true to know if the entity has been modified or not
+   * @param id of entity
+   */
+    setIsDirty(id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id] = {
+          ...state.entities.byId[id],
+          $isDirty: true,
+        }
+      }
+    },
+
+    /**
+   * set $isDirty property to false to know if the entity has been modified or not
+   * @param id of entity
+   */
+    setIsNotDirty(id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id] = {
+          ...state.entities.byId[id],
+          $isDirty: false,
+        }
+      }
+    },
+
+    /**
+     * update field of an entity
+     * @param field: string field to update
+     * @param id: Id of entity
+     */
+    updateField<K extends keyof T>(field: K, value: (T & { $isDirty: boolean })[K], id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id][field] = value
+        this.setIsDirty(id)
+      }
     },
   }
 }

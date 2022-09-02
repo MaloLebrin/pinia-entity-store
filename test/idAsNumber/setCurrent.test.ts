@@ -1,3 +1,4 @@
+import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
 import { getExpectedObjectProperties, user } from '../utils/dataFixtures'
@@ -20,12 +21,14 @@ describe('setCurrent action should return correct value', () => {
 
     if (noNull(userStore.getCurrent)) {
       expect(getExpectedObjectProperties(userStore.getCurrent)).toBeTruthy()
+      expect(hasOwnProperty(userStore.getCurrent, '$isDirty')).toBeTruthy()
       expect(userStore.getCurrent.id).toBe(1)
       expect(userStore.getCurrent.email).toBe(user.email)
       expect(userStore.getCurrent.token).toBe(user.token)
       expect(userStore.getCurrent.firstName).toBe(user.firstName)
       expect(userStore.getCurrent.lastName).toBe(user.lastName)
       expect(userStore.getCurrent.companyName).toBe(user.companyName)
+      expect(userStore.getCurrent.$isDirty).toBeFalsy()
     }
   })
 

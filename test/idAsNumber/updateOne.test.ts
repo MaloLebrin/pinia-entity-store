@@ -1,3 +1,4 @@
+import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
 import { getExpectedObjectProperties, usersArray } from '../utils/dataFixtures'
@@ -125,6 +126,14 @@ describe('updateOne action should return correct value', () => {
     const userStore = useUserStore()
 
     expect(userStore.getFirstActive).toBeUndefined()
+  })
+
+  it('$isDirty property exist and is false', () => {
+    const userStore = useUserStore()
+    const user = userStore.getOne(1)
+    expect(hasOwnProperty(user, '$isDirty')).toBeTruthy()
+    expect(user.$isDirty).toBeTruthy()
+    expect(userStore.isDirty(user.id)).toBeTruthy()
   })
 
   afterEach(() => {

@@ -1,6 +1,6 @@
 import { uniq } from '@antfu/utils'
-import type { State, WithId } from './index'
-import type { Id } from '~/types/WithId'
+import type { State } from './index'
+import type { Id, WithId } from '~/types/WithId'
 
 export default function createGetters<T extends WithId>(currentState: State<T>) {
   /**
@@ -79,14 +79,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return state.entities.byId
 
-      return state.entities.allIds.reduce((acc: Record<Id, T>, id: Id) => {
+      return state.entities.allIds.reduce((acc: Record<Id, T & { $isDirty: boolean }>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<Id, T>)
+      }, {} as Record<Id, T & { $isDirty: boolean }>)
     }
   }
 
@@ -99,14 +99,14 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       if (typeof filter !== 'function')
         return Object.values(state.entities.byId)
 
-      return Object.values(state.entities.allIds.reduce((acc: Record<Id, T>, id: Id) => {
+      return Object.values(state.entities.allIds.reduce((acc: Record<Id, T & { $isDirty: boolean }>, id: Id) => {
         const item = state.entities.byId[id]
         if (!filter(item))
           return acc
 
         acc[id] = item
         return acc
-      }, {} as Record<Id, T>))
+      }, {} as Record<Id, T & { $isDirty: boolean }>))
     }
   }
 
@@ -179,6 +179,15 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     return (id: Id) => state.entities.active.includes(id)
   }
 
+  /**
+   * helper to know if an entity has been modified
+   *  @param id - The id of the item
+   *  @return boolean
+   */
+  function isDirty(state = currentState) {
+    return (id: Id) => state.entities.byId[id].$isDirty
+  }
+
   return {
     findManyById,
     findOneById,
@@ -198,5 +207,6 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     getWhereArray,
     isAlreadyActive,
     isAlreadyInStore,
+    isDirty,
   }
 }
