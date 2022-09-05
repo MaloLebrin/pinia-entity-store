@@ -89,10 +89,17 @@ export default function createActions<T extends WithId>(state: State<T>) {
       ids.forEach(id => this.deleteOne(id))
     },
 
+    /**
+     * reset entities.active to an empty Array
+     */
     resetActive() {
       state.entities.active = []
     },
 
+    /**
+   * set one entity as active with his id
+   * @param id of entity to set as active
+   */
     setActive(id: Id) {
       if (!state.entities.active.includes(id))
         state.entities.active.push(id)
