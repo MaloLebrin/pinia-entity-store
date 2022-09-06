@@ -41,7 +41,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "npm run build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.2",
@@ -54,6 +57,7 @@
     "unplugin-auto-import": "^0.11.2",
     "vite": "^3.0.9",
     "vitest": "^0.22.1",
+    "vitepress": "^1.0.0-alpha.13",
     "vue": "^3.2.38"
   }
 }
