@@ -6,6 +6,7 @@
     "access": "public",
     "registry": "https://npm.pkg.github.com/@malolebrin"
   },
+  "packageManager": "pnpm@7.11.0",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
   "author": {
     "name": "Malo Lebrin",
