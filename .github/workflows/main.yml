@@ -33,9 +33,11 @@ jobs:
       - name: Build
         run: pnpm docs:build
 
+      - name: Serve
+        run: pnpm docs:serve
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: docs/.vitepress/dist
-        run: pnpm docs:serve
