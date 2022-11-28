@@ -106,14 +106,14 @@ returns a list of missing entities in the store compared to the entities passed 
 const userStore = useUserStore()
 userStore.getMissingsEntities([
   {
-  id: 1,
-  firstName: 'John',
-  lastName: 'Doe',
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
   },
   {
-  id: 2,
-  firstName: 'Jane',
-  lastName: 'Doe',
+    id: 2,
+    firstName: 'Jane',
+    lastName: 'Doe',
   },
 ])
 ```
@@ -266,4 +266,18 @@ Return a boolean indicating wether or not the entity has been modified.
 ```ts
 const userStore = useUserStore()
 userStore.isDirty(1)
+```
+## search
+
+▸ **search**(`fieldValue: string`): `T[]`
+
+Return a list of entities which contains the character string
+#### Returns
+`boolean`
+
+**`Example`**
+
+```ts
+const userStore = useUserStore()
+userStore.search('john')
 ```

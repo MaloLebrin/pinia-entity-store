@@ -1,7 +1,7 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
-import { getExpectedObjectProperties, user, user2, usersArray } from '../utils/dataFixtures'
+import { getExpectedObjectProperties, user, user2, user3, user4, usersArray } from '../utils/dataFixtures'
 
 describe('create action should return correct value', () => {
   beforeEach(() => {
@@ -80,7 +80,7 @@ describe('create action should return correct value', () => {
   it('getter getMissingEntities return correct value', () => {
     const userStore = useUserStore()
 
-    expect(userStore.getMissingEntities(usersArray)).toEqual([user2])
+    expect(userStore.getMissingEntities(usersArray)).toEqual([user2, user3, user4])
   })
 
   it('getter getwhereArray return correct value', () => {

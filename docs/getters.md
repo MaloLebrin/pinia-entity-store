@@ -29,3 +29,4 @@ userStore.getWhereArray(user => user.lastName === 'Doe')
 - `ìsAlreadyInStore(id: number)`: Return a boolean indicating wether or not the state contains entity.
 - `isAlreadyActive(id: number)`: Return a boolean indicating wether or not the active state contains entity.
 - `isDirty(id: number)`: Return a boolean indicating wether or not the entity has been modified.
+- `search(fieldValue: string)`: Return a list of entities which contains the character string
