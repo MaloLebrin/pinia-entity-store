@@ -1,9 +1,9 @@
 import { isNumber, isString } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
-import { convertIdToString, getExpectedObjectProperties, user, user2, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
+import { convertIdToString, getExpectedObjectProperties, user, user2, user3, user4, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
 
-describe('create action should return correct value', () => {
+describe.only('create action should return correct value', () => {
   beforeEach(() => {
     const app = createApp({})
     const pinia = createPinia()
@@ -87,7 +87,7 @@ describe('create action should return correct value', () => {
   it('getter getMissingEntities return correct value', () => {
     const userStore = useUserStore()
     const userArrayIdAsString = usersArray.map(user => convertIdToString(user))
-    expect(userStore.getMissingEntities(userArrayIdAsString)).toEqual([convertIdToString(user2)])
+    expect(userStore.getMissingEntities(userArrayIdAsString)).toEqual([convertIdToString(user2), convertIdToString(user3), convertIdToString(user4)])
   })
 
   it('getter getwhereArray return correct value', () => {
@@ -133,6 +133,17 @@ describe('create action should return correct value', () => {
     const userStore = useUserStore()
 
     expect(userStore.isAlreadyInStore(userIdString)).toBeTruthy()
+  })
+
+  it('search by sting should render user', () => {
+    const userStore = useUserStore()
+    const { createMany } = userStore
+    createMany(usersArray)
+    const users = userStore.search('test')
+
+    expect(users).toBeTruthy()
+    expect(users).toHaveLength(3)
+    expect(users.every(user => getExpectedObjectProperties(userStore.getOne(user.id)))).toBeTruthy()
   })
 
   afterEach(() => {

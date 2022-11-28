@@ -188,6 +188,19 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     return (id: Id) => state.entities.byId[id].$isDirty
   }
 
+  function search(state = currentState) {
+    return (field: string) => Object.values(state.entities.byId)
+      // eslint-disable-next-line array-callback-return
+      .filter(item => {
+        const regex = new RegExp(field, 'i')
+        for (const value of Object.values(item)) {
+          if (typeof value === 'string' && regex.test(value)) {
+            return true
+          }
+        }
+      })
+  }
+
   return {
     findManyById,
     findOneById,
@@ -208,5 +221,6 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     isAlreadyActive,
     isAlreadyInStore,
     isDirty,
+    search,
   }
 }

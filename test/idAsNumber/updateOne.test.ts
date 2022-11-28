@@ -61,14 +61,14 @@ describe('updateOne action should return correct value', () => {
     expect(getExpectedObjectProperties(userStore.getAllArray[0])).toBeTruthy()
     expect(isArray(userStore.getAllArray)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllArray)).toBeFalsy()
-    expect(userStore.getAllArray).toHaveLength(2)
+    expect(userStore.getAllArray).toHaveLength(4)
   })
 
   it('getter getAllIds return correct value', () => {
     const userStore = useUserStore()
 
     expect(userStore.getAllIds).toBeDefined()
-    expect(userStore.getAllIds).toHaveLength(2)
+    expect(userStore.getAllIds).toHaveLength(4)
     expect(userStore.getAllIds[0]).toBeDefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeTruthy()
@@ -77,9 +77,9 @@ describe('updateOne action should return correct value', () => {
   it('getter getMissingIds return correct value', () => {
     const userStore = useUserStore()
 
-    const ids = [1, 2, 3]
-    expect(userStore.getMissingIds(ids)).toEqual([3])
-    expect(userStore.getMissingIds(ids)).toHaveLength(1)
+    const ids = [1, 2, 3, 999, 888]
+    expect(userStore.getMissingIds(ids)).toEqual([999, 888])
+    expect(userStore.getMissingIds(ids)).toHaveLength(2)
   })
 
   it('getter getMissingEntities return correct value', () => {
