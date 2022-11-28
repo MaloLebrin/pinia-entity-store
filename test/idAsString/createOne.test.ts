@@ -3,7 +3,7 @@ import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
 import { convertIdToString, getExpectedObjectProperties, user, user2, user3, user4, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
 
-describe.only('create action should return correct value', () => {
+describe('create action should return correct value', () => {
   beforeEach(() => {
     const app = createApp({})
     const pinia = createPinia()
