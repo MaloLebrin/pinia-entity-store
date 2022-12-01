@@ -13,7 +13,6 @@ specifiers:
   vite: ^3.2.4
   vitepress: ^1.0.0-alpha.29
   vitest: ^0.25.2
-  vue: ^3.2.45
 
 devDependencies:
   '@antfu/eslint-config': 0.33.0_e3uo4sehh4zr4i6m57mkkxxv7y
@@ -22,13 +21,12 @@ devDependencies:
   '@vitest/coverage-c8': 0.25.2
   c8: 7.12.0
   eslint: 8.27.0
-  pinia: 2.0.24_mgnvym7yiazkylwwogi5r767ue
+  pinia: 2.0.24_typescript@4.9.3
   typescript: 4.9.3
   unplugin-auto-import: 0.12.0
   vite: 3.2.4_@types+node@18.11.9
   vitepress: 1.0.0-alpha.29_@types+node@18.11.9
   vitest: 0.25.2
-  vue: 3.2.45
 
 packages:
 
@@ -2702,7 +2700,7 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /pinia/2.0.24_mgnvym7yiazkylwwogi5r767ue:
+  /pinia/2.0.24_typescript@4.9.3:
     resolution: {integrity: sha512-DDLd4Iphyc+6PYYYbx7jkb6WP9gecgu9bz9huyB5rb7CdJI3DhzYiZI+/Ih8MLewRrP9DSpslF/BgSNrJtZU7A==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
@@ -2716,8 +2714,7 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.4.5
       typescript: 4.9.3
-      vue: 3.2.45
-      vue-demi: 0.12.5_vue@3.2.45
+      vue-demi: 0.12.5
     dev: true
 
   /pkg-types/1.0.1:
@@ -3348,6 +3345,19 @@ packages:
 
   /vscode-textmate/6.0.0:
     resolution: {integrity: sha512-gu73tuZfJgu+mvCSy4UZwd2JXykjK9zAZsfmDeut5dx/1a7FeTk0XwJsSuqQn+cuMCGVbIBfl+s53X4T19DnzQ==}
+    dev: true
+
+  /vue-demi/0.12.5:
+    resolution: {integrity: sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
     dev: true
 
   /vue-demi/0.12.5_vue@3.2.45:
