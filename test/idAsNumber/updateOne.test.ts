@@ -1,8 +1,12 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
-import { isArray, isArrayOfNumbers } from '../utils/array'
-import { defaultTestInit } from '../utils/baseState'
-import { getExpectedObjectProperties, usersArray } from '../utils/dataFixtures'
+import {
+  defaultTestInit,
+  getExpectedObjectProperties,
+  isArray,
+  isArrayOfNumbers,
+  usersArray,
+} from '../utils'
 
 describe('updateOne action should return correct value', () => {
   beforeEach(() => {

@@ -1,6 +1,16 @@
 import useUserStore from '../store/userStore'
-import { isArray, isArrayOfNumbers } from '../utils/array'
-import { convertIdToString, getExpectedObjectProperties, user, user2, user3, user4, userIdString, usersArray } from '../utils/dataFixtures'
+import {
+  convertIdToString,
+  getExpectedObjectProperties,
+  isArray,
+  isArrayOfNumbers,
+  user,
+  user2,
+  user3,
+  user4,
+  userIdString,
+  usersArray,
+} from '../utils'
 
 describe('delete action should return correct value', () => {
   beforeEach(() => {

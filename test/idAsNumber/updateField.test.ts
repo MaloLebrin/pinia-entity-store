@@ -1,7 +1,6 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
-import { defaultTestInit } from '../utils/baseState'
-import { getExpectedObjectProperties, usersArray } from '../utils/dataFixtures'
+import { defaultTestInit, getExpectedObjectProperties, usersArray } from '../utils'
 
 describe('updateField action should return correct value', () => {
   beforeEach(() => {

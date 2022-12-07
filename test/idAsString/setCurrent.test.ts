@@ -1,14 +1,18 @@
 import { isNumber, isString } from '@antfu/utils'
 import useUserStore from '../store/userStore'
-import { isArray, isArrayOfNumbers } from '../utils/array'
-import { convertIdToString, getExpectedObjectProperties, user, userIdString } from '../utils/dataFixtures'
+import {
+  convertIdToString,
+  defaultTestInit,
+  getExpectedObjectProperties,
+  isArray,
+  isArrayOfNumbers,
+  user,
+  userIdString,
+} from '../utils'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { setCurrent } = useUserStore()
 
     setCurrent(convertIdToString(user))
