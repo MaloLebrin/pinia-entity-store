@@ -1,14 +1,12 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, user } from '../utils/dataFixtures'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { setCurrent } = useUserStore()
 
     setCurrent(user)
