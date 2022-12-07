@@ -1,4 +1,5 @@
 import 'pinia'
+import type { EntitiesState } from '~/types/State'
 
 // declare module 'pinia' {
 //   export interface PiniaCustomProperties {
@@ -18,5 +19,9 @@ declare module 'pinia' {
     entityStoreOptions?: {
       isEntityStore: boolean
     }
+  }
+
+  export interface PiniaCustomStateProperties<S> {
+    entities: EntitiesState<S>
   }
 }

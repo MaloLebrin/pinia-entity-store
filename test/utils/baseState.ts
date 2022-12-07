@@ -19,7 +19,6 @@ export function defaultTestInit() {
     // console.log(options, `<==== options ${store.$id}`)
     // const { actions, state, getters } = options
 
-    options.entityStoreOptions
     console.log(options.entityStoreOptions, `<==== options.entityStoreOptions ${store.$id}`)
 
     if (options.entityStoreOptions && options.entityStoreOptions.isEntityStore) {
