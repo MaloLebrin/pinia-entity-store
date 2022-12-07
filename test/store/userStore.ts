@@ -3,7 +3,7 @@ import { createActions, createGetters } from '../../src'
 import type { UserEntity } from './Store'
 
 export const useUserStore = defineStore('user', {
-  state: () => ({ ...userState }),
+  state: () => ({}),
   getters: {
     ...createGetters<UserEntity>(userState),
   },
@@ -13,6 +13,9 @@ export const useUserStore = defineStore('user', {
     resetState() {
       this.$state = defaultState()
     },
+  },
+  entityStoreOptions: {
+    isEntityStore: true,
   },
 })
 
