@@ -1,13 +1,11 @@
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, user } from '../utils/dataFixtures'
 
 describe('setActive action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { setActive } = useUserStore()
 
     setActive(user.id)

@@ -1,13 +1,11 @@
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
+import { defaultTestInit } from '../utils/baseState'
 import { convertIdToString, getExpectedObjectProperties, user, userIdString } from '../utils/dataFixtures'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { setCurrent, removeCurrent } = useUserStore()
 
     setCurrent(convertIdToString(user))

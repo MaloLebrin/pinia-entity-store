@@ -1,13 +1,11 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, usersArray } from '../utils/dataFixtures'
 
 describe('updateField action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { updateField, createMany } = useUserStore()
 
     createMany(usersArray)
