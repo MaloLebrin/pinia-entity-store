@@ -1,13 +1,11 @@
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, user, user2, user3, user4, usersArray } from '../utils/dataFixtures'
 
 describe('delete action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { createMany, deleteMany } = useUserStore()
     createMany([user])
     deleteMany([user.id])

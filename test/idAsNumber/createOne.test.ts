@@ -1,14 +1,12 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
 import { isArray, isArrayOfNumbers } from '../utils/array'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, user, user2, user3, user4, usersArray } from '../utils/dataFixtures'
 
 describe('create action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { createMany } = useUserStore()
     const userStore = useUserStore()
     if (!userStore.isAlreadyInStore(user.id))

@@ -1,13 +1,11 @@
 import { hasOwnProperty } from '@antfu/utils'
 import useUserStore from '../store/userStore'
+import { defaultTestInit } from '../utils/baseState'
 import { getExpectedObjectProperties, usersArray } from '../utils/dataFixtures'
 
 describe('setIsNotDirty action should turn to false dirty property', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { updateField, createMany } = useUserStore()
 
     createMany(usersArray)
