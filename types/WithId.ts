@@ -1,3 +1,5 @@
 export interface WithId {
-  id: number
+  id: Id
 }
+
+export type Id = number | string

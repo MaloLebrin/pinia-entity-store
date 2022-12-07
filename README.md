@@ -141,6 +141,7 @@ userStore.getWhereArray(user => user.lastName === 'Doe')
 - `getFirstActive`: first entity get from array of active entities stored in state.
 - `ìsAlreadyInStore(id: number)`: Return a boolean indicating wether or not the state contains entity.
 - `isAlreadyActive(id: number)`: Return a boolean indicating wether or not the active state contains entity.
+- `isDirty(id: number)`: Return a boolean indicating wether or not the entity has been modified.
 
 ## List of actions:
 
@@ -154,6 +155,9 @@ userStore.getWhereArray(user => user.lastName === 'Doe')
 - `deleteMany`: delete many entities in Store
 - `setActive`: add entity in active array
 - `resetActive`: remove all active entities
+- `setIsDirty(id: number)`: set $isDirty property to true to know if the entity has been modified
+- `setIsNotDirty(id: number)`: set $isDirty property to false to know if the entity has been modified or not
+- `updateField`: update field's value of an entity
 
 ## License
 

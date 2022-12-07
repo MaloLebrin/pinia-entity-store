@@ -1,5 +1,5 @@
-import type { State, WithId } from '../types'
-// import type {  } from 'pinia'
+import type { State } from './index'
+import type { Id, WithId } from '~/types/WithId'
 
 export default function createActions<T extends WithId>(state: State<T>) {
   return {
@@ -13,9 +13,10 @@ export default function createActions<T extends WithId>(state: State<T>) {
           ...state.entities.byId[payload.id],
           ...payload,
         }
+        this.setIsDirty(payload.id)
       }
       else {
-        state.entities.byId[payload.id] = payload
+        state.entities.byId[payload.id] = { ...payload, $isDirty: false }
         state.entities.allIds.push(payload.id)
       }
     },
@@ -33,7 +34,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
      * @param payload
      */
     setCurrent(payload: T) {
-      state.entities.current = payload
+      state.entities.current = { ...payload, $isDirty: false }
     },
 
     /**
@@ -49,15 +50,16 @@ export default function createActions<T extends WithId>(state: State<T>) {
      * @param id of entity to update
      * @param payload data of entity to update
      */
-    updateOne(id: number, payload: T): void {
+    updateOne(id: Id, payload: T): void {
       if (state.entities.byId[id]) {
         state.entities.byId[id] = {
           ...state.entities.byId[id],
           ...payload,
         }
-      } else {
-        state.entities.byId[payload.id] = payload
-        state.entities.allIds.push(payload.id)
+        this.setIsDirty(id)
+      }
+      else {
+        this.createOne(payload)
       }
     },
 
@@ -74,7 +76,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
    * Delete one entity in Store
    * @param id of entity to delete
    */
-    deleteOne(id: number) {
+    deleteOne(id: Id) {
       delete state.entities.byId[id]
       state.entities.allIds = state.entities.allIds.filter(entityId => entityId !== id)
     },
@@ -83,17 +85,62 @@ export default function createActions<T extends WithId>(state: State<T>) {
    * delete many entities in Store
    * @param ids of entities to delete
    */
-    deleteMany(ids: number[]) {
+    deleteMany(ids: Id[]) {
       ids.forEach(id => this.deleteOne(id))
     },
 
+    /**
+     * reset entities.active to an empty Array
+     */
     resetActive() {
       state.entities.active = []
     },
 
-    setActive(id: number) {
+    /**
+   * set one entity as active with his id
+   * @param id of entity to set as active
+   */
+    setActive(id: Id) {
       if (!state.entities.active.includes(id))
         state.entities.active.push(id)
+    },
+
+    /**
+   * set $isDirty property to true to know if the entity has been modified or not
+   * @param id of entity
+   */
+    setIsDirty(id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id] = {
+          ...state.entities.byId[id],
+          $isDirty: true,
+        }
+      }
+    },
+
+    /**
+   * set $isDirty property to false to know if the entity has been modified or not
+   * @param id of entity
+   */
+    setIsNotDirty(id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id] = {
+          ...state.entities.byId[id],
+          $isDirty: false,
+        }
+      }
+    },
+
+    /**
+     * update field of an entity
+     * @param field: string field to update
+     * @param id: Id of entity
+     */
+    updateField<K extends keyof T>(field: K, value: (T & { $isDirty: boolean })[K], id: Id) {
+      if (state.entities.byId[id]) {
+        state.entities.byId[id][field] = value
+        this.setIsDirty(id)
+      }
     },
   }
 }

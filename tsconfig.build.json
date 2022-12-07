@@ -24,4 +24,9 @@
       "vite/client"
     ]
   },
+  "exclude": [
+    "test/**/*.test.ts",
+    "vitest.config.ts",
+    "docs/**"
+  ]
 }

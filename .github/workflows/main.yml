@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy-CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  NODE_ENV: prod
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # - name: Install pnpm
+      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          node-version: 16
+          cache: "pnpm"
+      - run: pnpm install
+
+      - name: Build
+        run: pnpm docs:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          publish_dir: docs/.vitepress/dist

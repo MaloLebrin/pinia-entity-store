@@ -1,6 +1,6 @@
 import { defaultState, userState } from '../utils/baseState'
-import type { UserEntity } from '../../types'
 import { createActions, createGetters } from '../../src'
+import type { UserEntity } from './Store'
 
 export const useUserStore = defineStore('user', {
   state: () => ({ ...userState }),

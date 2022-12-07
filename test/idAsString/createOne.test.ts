@@ -1,6 +1,7 @@
-import useUserStore from './store/userStore'
-import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user, user2, usersArray } from './utils/dataFixtures'
+import { isNumber, isString } from '@antfu/utils'
+import useUserStore from '../store/userStore'
+import { isArray, isArrayOfNumbers } from '../utils/array'
+import { convertIdToString, getExpectedObjectProperties, user, user2, user3, user4, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
 
 describe('create action should return correct value', () => {
   beforeEach(() => {
@@ -11,7 +12,14 @@ describe('create action should return correct value', () => {
     const { createMany } = useUserStore()
     const userStore = useUserStore()
     if (!userStore.isAlreadyInStore(user.id))
-      createMany([user])
+      createMany([convertIdToString(user)])
+  })
+
+  it('id of a user should be a string', () => {
+    const userStore = useUserStore()
+    const userId = userStore.getAllArray[0]?.id
+    expect(isNumber(userId)).toBeFalsy()
+    expect(isString(userId)).toBeTruthy()
   })
 
   it('getter current return correct value', () => {
@@ -22,21 +30,21 @@ describe('create action should return correct value', () => {
   it('getter findOneById return correct value', () => {
     const userStore = useUserStore()
 
-    const userFinded = userStore.findOneById(1)
+    const userFinded = userStore.findOneById(userIdString)
 
     expect(userFinded).toBeDefined()
     expect(noNull(userFinded)).toBeTruthy()
     expect(getExpectedObjectProperties(userFinded)).toBeTruthy()
 
-    const userNotFinded = userStore.findOneById(999)
-    expect(userNotFinded).toBeUndefined()
-    expect(getExpectedObjectProperties(userNotFinded)).toBeFalsy()
+    const userNotFound = userStore.findOneById('999')
+    expect(userNotFound).toBeUndefined()
+    expect(getExpectedObjectProperties(userNotFound)).toBeFalsy()
   })
 
   it('getMany return correct Value', () => {
     const userStore = useUserStore()
 
-    const userFinded = userStore.getMany([1])
+    const userFinded = userStore.getMany([userIdString])
     expect(userFinded).toBeDefined()
     expect(noNull(userFinded)).toBeTruthy()
     expect(isArray(userFinded)).toBeTruthy()
@@ -48,8 +56,8 @@ describe('create action should return correct value', () => {
 
     expect(userStore.getAll).toBeDefined()
     expect(typeof userStore.getAll).toBe('object')
-    expect(userStore.getAll[1]).toBeDefined()
-    expect(getExpectedObjectProperties(userStore.getAll[1])).toBeTruthy()
+    expect(userStore.getAll[userIdString]).toBeDefined()
+    expect(getExpectedObjectProperties(userStore.getAll[userIdString])).toBeTruthy()
   })
 
   it('getter getAllArray return correct value', () => {
@@ -66,26 +74,26 @@ describe('create action should return correct value', () => {
     expect(userStore.getAllIds).toHaveLength(1)
     expect(userStore.getAllIds[0]).toBeDefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
-    expect(isArrayOfNumbers(userStore.getAllIds)).toBeTruthy()
+    expect(isArrayOfNumbers(userStore.getAllIds)).toBeFalsy()
   })
 
   it('getter getMissingIds return correct value', () => {
     const userStore = useUserStore()
 
-    const ids = [1, 2]
-    expect(userStore.getMissingIds(ids)).toEqual([2])
+    const ids = [userIdString, userIdString2]
+    expect(userStore.getMissingIds(ids)).toEqual([userIdString2])
   })
 
   it('getter getMissingEntities return correct value', () => {
     const userStore = useUserStore()
-
-    expect(userStore.getMissingEntities(usersArray)).toEqual([user2])
+    const userArrayIdAsString = usersArray.map(user => convertIdToString(user))
+    expect(userStore.getMissingEntities(userArrayIdAsString)).toEqual([convertIdToString(user2), convertIdToString(user3), convertIdToString(user4)])
   })
 
   it('getter getwhereArray return correct value', () => {
     const userStore = useUserStore()
 
-    const usersFinded = userStore.getWhereArray(user => user.id === 1)
+    const usersFinded = userStore.getWhereArray(user => user.id.toString() === userIdString)
     expect(usersFinded).toBeDefined()
     expect(usersFinded).toHaveLength(1)
     expect(isArray(usersFinded)).toBeTruthy()
@@ -102,9 +110,9 @@ describe('create action should return correct value', () => {
   it('getter getOne return correct value', () => {
     const userStore = useUserStore()
 
-    expect(userStore.getOne(1)).toBeDefined()
-    expect(getExpectedObjectProperties(userStore.getOne(1))).toBeTruthy()
-    expect(userStore.getOne(999)).toBeUndefined()
+    expect(userStore.getOne(userIdString)).toBeDefined()
+    expect(getExpectedObjectProperties(userStore.getOne(userIdString))).toBeTruthy()
+    expect(userStore.getOne('999')).toBeUndefined()
   })
 
   it('getActive return correct value', () => {
@@ -124,7 +132,18 @@ describe('create action should return correct value', () => {
   it('isAlready in store return correct value', () => {
     const userStore = useUserStore()
 
-    expect(userStore.isAlreadyInStore(1)).toBeTruthy()
+    expect(userStore.isAlreadyInStore(userIdString)).toBeTruthy()
+  })
+
+  it('search by sting should render user', () => {
+    const userStore = useUserStore()
+    const { createMany } = userStore
+    createMany(usersArray)
+    const users = userStore.search('test')
+
+    expect(users).toBeTruthy()
+    expect(users).toHaveLength(3)
+    expect(users.every(user => getExpectedObjectProperties(userStore.getOne(user.id)))).toBeTruthy()
   })
 
   afterEach(() => {

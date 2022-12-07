@@ -1,6 +1,7 @@
-import useUserStore from './store/userStore'
-import { isArray, isArrayOfNumbers } from './utils/array'
-import { getExpectedObjectProperties, user } from './utils/dataFixtures'
+import { hasOwnProperty } from '@antfu/utils'
+import useUserStore from '../store/userStore'
+import { isArray, isArrayOfNumbers } from '../utils/array'
+import { getExpectedObjectProperties, user } from '../utils/dataFixtures'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {
@@ -8,15 +9,27 @@ describe('setCurrent action should return correct value', () => {
     const pinia = createPinia()
     app.use(pinia)
     setActivePinia(pinia)
-    const { setCurrent, removeCurrent } = useUserStore()
+    const { setCurrent } = useUserStore()
 
     setCurrent(user)
-    removeCurrent()
   })
 
   it('getter current return correct value', () => {
     const userStore = useUserStore()
-    expect(userStore.getCurrent).toBeNull()
+
+    expect(noNull(userStore.getCurrent)).toBeTruthy()
+
+    if (noNull(userStore.getCurrent)) {
+      expect(getExpectedObjectProperties(userStore.getCurrent)).toBeTruthy()
+      expect(hasOwnProperty(userStore.getCurrent, '$isDirty')).toBeTruthy()
+      expect(userStore.getCurrent.id).toBe(1)
+      expect(userStore.getCurrent.email).toBe(user.email)
+      expect(userStore.getCurrent.token).toBe(user.token)
+      expect(userStore.getCurrent.firstName).toBe(user.firstName)
+      expect(userStore.getCurrent.lastName).toBe(user.lastName)
+      expect(userStore.getCurrent.companyName).toBe(user.companyName)
+      expect(userStore.getCurrent.$isDirty).toBeFalsy()
+    }
   })
 
   it('getter findOneById return correct value', () => {
@@ -29,9 +42,9 @@ describe('setCurrent action should return correct value', () => {
     expect(noNull(userFinded)).toBeTruthy()
     expect(getExpectedObjectProperties(userFinded)).toBeFalsy()
 
-    const userNotFinded = userStore.findOneById(999)
-    expect(userNotFinded).toBeUndefined()
-    expect(getExpectedObjectProperties(userNotFinded)).toBeFalsy()
+    const userNotFound = userStore.findOneById(999)
+    expect(userNotFound).toBeUndefined()
+    expect(getExpectedObjectProperties(userNotFound)).toBeFalsy()
   })
 
   it('getter getAll return correct value', () => {
