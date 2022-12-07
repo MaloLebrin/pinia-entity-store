@@ -1,7 +1,7 @@
 import { createActions, createGetters, createState } from './'
 import type { CreationParams, WithId } from '~/types'
 
-export function createPiniaEntityStore<T extends WithId>(args: CreationParams) {
+export default function createPiniaEntityStore<T extends WithId>(args: CreationParams) {
   const { id, options } = args
 
   const entityStoreState = createState<T>()
