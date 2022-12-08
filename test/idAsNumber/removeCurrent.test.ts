@@ -1,7 +1,6 @@
 import useUserStore from '../store/userStore'
+import { convertIdToString, defaultTestInit, getExpectedObjectProperties, user, userIdString } from '../utils'
 import { isArray, isArrayOfNumbers } from '../utils/array'
-import { defaultTestInit } from '../utils/baseState'
-import { convertIdToString, getExpectedObjectProperties, user, userIdString } from '../utils/dataFixtures'
 
 describe('setCurrent action should return correct value', () => {
   beforeEach(() => {

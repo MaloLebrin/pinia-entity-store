@@ -1,13 +1,18 @@
 import useUserStore from '../store/userStore'
-import { isArray, isArrayOfNumbers } from '../utils/array'
-import { convertIdToString, getExpectedObjectProperties, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
+import {
+  convertIdToString,
+  defaultTestInit,
+  getExpectedObjectProperties,
+  isArray,
+  isArrayOfNumbers,
+  userIdString,
+  userIdString2,
+  usersArray,
+} from '../utils'
 
 describe('updateOne action should return correct value', () => {
   beforeEach(() => {
-    const app = createApp({})
-    const pinia = createPinia()
-    app.use(pinia)
-    setActivePinia(pinia)
+    defaultTestInit()
     const { updateMany } = useUserStore()
 
     updateMany(usersArray.map(user => convertIdToString(user)))

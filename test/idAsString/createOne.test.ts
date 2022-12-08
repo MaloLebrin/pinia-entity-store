@@ -1,7 +1,18 @@
 import { isNumber, isString } from '@antfu/utils'
 import useUserStore from '../store/userStore'
-import { isArray, isArrayOfNumbers } from '../utils/array'
-import { convertIdToString, getExpectedObjectProperties, user, user2, user3, user4, userIdString, userIdString2, usersArray } from '../utils/dataFixtures'
+import {
+  convertIdToString,
+  getExpectedObjectProperties,
+  isArray,
+  isArrayOfNumbers,
+  user,
+  user2,
+  user3,
+  user4,
+  userIdString,
+  userIdString2,
+  usersArray,
+} from '../utils'
 
 describe('create action should return correct value', () => {
   beforeEach(() => {
