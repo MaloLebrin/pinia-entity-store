@@ -2,7 +2,7 @@
   "name": "@malolebrin/pinia-entity-store",
   "version": "0.2.2",
   "private": false,
-  "packageManager": "pnpm@7.20.0",
+  "packageManager": "pnpm@7.21.0",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
   "author": {
     "name": "Malo Lebrin",
