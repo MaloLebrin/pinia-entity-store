@@ -32,7 +32,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "rm -rf dist/ && tsc --project tsconfig.build.json",
     "type:check": "tsc --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage",
