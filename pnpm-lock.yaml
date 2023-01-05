@@ -15,9 +15,11 @@ specifiers:
   vitest: ^0.26.0
   vue: ^3.2.45
 
+dependencies:
+  '@antfu/utils': 0.7.0
+
 devDependencies:
   '@antfu/eslint-config': 0.34.0_e3uo4sehh4zr4i6m57mkkxxv7y
-  '@antfu/utils': 0.7.0
   '@types/node': 18.11.9
   '@vitest/coverage-c8': 0.26.0
   c8: 7.12.0
@@ -233,7 +235,6 @@ packages:
 
   /@antfu/utils/0.7.0:
     resolution: {integrity: sha512-tH38JQEFLOdvZJC32ZbPTvWOQzxEtOQh5jOqBPDLw8sxBr0PFF+f2Csgwb7mRpD0QB1xu+PDoAifIPiCNneeNA==}
-    dev: true
 
   /@babel/code-frame/7.16.7:
     resolution: {integrity: sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg==}
