@@ -1,6 +1,6 @@
 {
   "name": "@malolebrin/pinia-entity-store",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "packageManager": "pnpm@7.22.0",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
@@ -32,7 +32,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "rm -rf dist/ && tsc --project tsconfig.build.json",
     "type:check": "tsc --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage",
@@ -44,9 +44,11 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
   },
+  "dependencies": {
+    "@antfu/utils": "^0.7.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
-    "@antfu/utils": "^0.7.0",
     "@types/node": "^18.11.9",
     "@vitest/coverage-c8": "^0.26.0",
     "c8": "^7.12.0",
