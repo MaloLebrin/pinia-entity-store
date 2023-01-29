@@ -82,7 +82,7 @@ describe('create action should return correct value', () => {
     const userStore = useUserStore()
 
     expect(userStore.getAllIds).toBeDefined()
-    expect(userStore.getAllIds).toHaveLength(1)
+    expect(userStore.getAllIds).toHaveLength(7)
     expect(userStore.getAllIds[0]).toBeDefined()
     expect(isArray(userStore.getAllIds)).toBeTruthy()
     expect(isArrayOfNumbers(userStore.getAllIds)).toBeFalsy()
