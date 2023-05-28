@@ -12,4 +12,3 @@ export interface UserEntity extends BaseStoreEntity {
   lastName: string
   companyName: string
 }
-

@@ -32,14 +32,14 @@ Add an array of entities received as arguments in the store
 const { createMany } = useUserStore()
 createMany([
   {
-  id: 1,
-  firstName: 'John',
-  lastName: 'Doe',
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
   },
   {
-  id: 2,
-  firstName: 'Jane',
-  lastName: 'Doe',
+    id: 2,
+    firstName: 'Jane',
+    lastName: 'Doe',
   },
 ])
 ```
@@ -78,14 +78,14 @@ update all entities in the array received as arguments in the store
 const { updateMany } = useUserStore()
 updateMany([
   {
-  id: 1,
-  firstName: 'John',
-  lastName: 'Doe',
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
   },
   {
-  id: 2,
-  firstName: 'Jane',
-  lastName: 'Doe',
+    id: 2,
+    firstName: 'Jane',
+    lastName: 'Doe',
   },
 ])
 ```
