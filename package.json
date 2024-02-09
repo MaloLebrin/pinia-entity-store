@@ -2,7 +2,7 @@
   "name": "@malolebrin/pinia-entity-store",
   "version": "0.2.4",
   "private": false,
-  "packageManager": "pnpm@8.14.3",
+  "packageManager": "pnpm@8.15.1",
   "description": "A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.",
   "author": {
     "name": "Malo Lebrin",
@@ -49,16 +49,16 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.11.17",
     "@vitest/coverage-c8": "^0.33.0",
-    "c8": "^9.0.0",
-    "eslint": "^8.41.0",
+    "c8": "^9.1.0",
+    "eslint": "^8.56.0",
     "pinia": "^2.1.7",
-    "typescript": "^5.0.4",
+    "typescript": "^5.3.3",
     "unplugin-auto-import": "^0.16.7",
-    "vite": "^5.0.12",
+    "vite": "^5.1.1",
     "vitepress": "^1.0.0-rc.42",
     "vitest": "^0.34.6",
-    "vue": "^3.3.13"
+    "vue": "^3.4.18"
   }
 }
