@@ -1,0 +1,1 @@
+import{_ as t,o as e,c as a,V as i}from"./chunks/framework.GTrqmF4k.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"contributions.md","filePath":"contributions.md"}'),o={name:"contributions.md"},n=i("",7),r=[n];function s(l,c,u,h,_,b){return e(),a("div",null,r)}const f=t(o,[["render",s]]);export{p as __pageData,f as default};
