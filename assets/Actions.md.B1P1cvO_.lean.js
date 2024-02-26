@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as i,a2 as o}from"./chunks/framework.D8dF00kD.js";const f=JSON.parse('{"title":"Actions (Setters)","description":"","frontmatter":{},"headers":[],"relativePath":"Actions.md","filePath":"Actions.md"}'),n={name:"Actions.md"},s=o("",3),a=[s];function r(c,d,l,h,u,_){return i(),t("div",null,a)}const m=e(n,[["render",r]]);export{f as __pageData,m as default};
