@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as i,a2 as s}from"./chunks/framework.BODE4nwY.js";const u=JSON.parse('{"title":"Getters","description":"","frontmatter":{},"headers":[],"relativePath":"getters.md","filePath":"getters.md"}'),a={name:"getters.md"},n=s("",7),l=[n];function r(o,h,d,c,p,k){return i(),e("div",null,l)}const y=t(a,[["render",r]]);export{u as __pageData,y as default};
