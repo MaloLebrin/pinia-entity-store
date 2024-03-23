@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a,a2 as i}from"./chunks/framework.DeAVoE1_.js";const p=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"contributions.md","filePath":"contributions.md"}'),o={name:"contributions.md"},n=i("",7),r=[n];function s(l,c,u,h,_,b){return a(),e("div",null,r)}const f=t(o,[["render",s]]);export{p as __pageData,f as default};
