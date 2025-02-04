@@ -1,1 +1,0 @@
-import{_ as t,o as e,c as i,V as s}from"./chunks/framework.GTrqmF4k.js";const u=JSON.parse('{"title":"Getters","description":"","frontmatter":{},"headers":[],"relativePath":"getters.md","filePath":"getters.md"}'),a={name:"getters.md"},n=s("",7),l=[n];function r(o,h,d,c,p,k){return e(),i("div",null,l)}const y=t(a,[["render",r]]);export{u as __pageData,y as default};
