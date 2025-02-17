@@ -45,7 +45,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "@antfu/utils": "^8.0.0",
+    "@antfu/utils": "^9.0.0",
     "@eslint/eslintrc": "^3.2.0"
   },
   "devDependencies": {
