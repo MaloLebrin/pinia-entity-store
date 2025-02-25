@@ -1,0 +1,1 @@
+import{_ as t,c as i,o as s,ae as a}from"./chunks/framework.CTVYQtO4.js";const k=JSON.parse('{"title":"Getters","description":"","frontmatter":{},"headers":[],"relativePath":"getters.md","filePath":"getters.md"}'),n={name:"getters.md"};function l(r,e,o,h,d,c){return s(),i("div",null,e[0]||(e[0]=[a("",7)]))}const g=t(n,[["render",l]]);export{k as __pageData,g as default};
