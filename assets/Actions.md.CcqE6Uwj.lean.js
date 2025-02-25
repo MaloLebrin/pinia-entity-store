@@ -1,1 +1,0 @@
-import{_ as t,c as i,o,ae as n}from"./chunks/framework.CTVYQtO4.js";const h=JSON.parse('{"title":"Actions (Setters)","description":"","frontmatter":{},"headers":[],"relativePath":"Actions.md","filePath":"Actions.md"}'),a={name:"Actions.md"};function s(r,e,c,d,l,u){return o(),i("div",null,e[0]||(e[0]=[n("",3)]))}const f=t(a,[["render",s]]);export{h as __pageData,f as default};
