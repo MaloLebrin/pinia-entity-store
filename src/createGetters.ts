@@ -236,6 +236,7 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     getAllIds,
     getCurrent,
     getFirstActive,
+    getFirstWhere,
     getIsEmpty,
     getIsNotEmpty,
     getMany,
