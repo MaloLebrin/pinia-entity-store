@@ -111,6 +111,27 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
   }
 
   /**
+   * Get the first item that passes the given filter callback.
+   * @param filter - The filtering callback that will be used to filter the items.
+   * @returns The first item that passes the filter, or the first item in the state if no filter is provided.
+   */
+  function getFirstWhere(state = currentState) {
+    return (filter: (arg: T) => boolean | null) => {
+      if (typeof filter !== 'function')
+        return Object.values(state.entities.byId)[0]
+
+      return Object.values(state.entities.allIds.reduce((acc: Record<Id, T & { $isDirty: boolean }>, id: Id) => {
+        const item = state.entities.byId[id]
+        if (!filter(item))
+          return acc
+
+        acc[id] = item
+        return acc
+      }, {} as Record<Id, T & { $isDirty: boolean }>))[0]
+    }
+  }
+
+  /**
    * Returns a boolean indicating wether or not the state is empty (contains no items).
    */
   function getIsEmpty(state = currentState) {
@@ -188,6 +209,11 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     return (id: Id) => state.entities.byId[id].$isDirty
   }
 
+  /**
+   * Search for an entity in the state
+   * @param field - The field to search for
+   * @return array of entities
+   */
   function search(state = currentState) {
     return (field: string) => Object.values(state.entities.byId)
       .filter(item => {
