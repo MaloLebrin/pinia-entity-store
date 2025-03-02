@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.0.0",
-    "@types/node": "^20.17.17",
+    "@types/node": "^22.0.0",
     "@vitest/coverage-c8": "^0.33.0",
     "c8": "^10.0.0",
     "eslint": "^9.19.0",
