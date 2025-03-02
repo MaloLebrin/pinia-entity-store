@@ -8,7 +8,7 @@ export default function createActions<T extends WithId>(state: State<T>) {
    * @param payload Entity to create
    */
     createOne(payload: T): void {
-      if (!state.entities.byId[payload.id]) {
+      if (!state.entities.byId[payload.id] && !state.entities.allIds.includes(payload.id)) {
         state.entities.allIds.push(payload.id)
       }
       state.entities.byId[payload.id] = { ...payload, $isDirty: false }
