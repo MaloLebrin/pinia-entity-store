@@ -11,9 +11,6 @@ importers:
       '@antfu/utils':
         specifier: ^9.1.0
         version: 9.1.0
-      '@eslint/eslintrc':
-        specifier: ^3.3.0
-        version: 3.3.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^4.3.0
