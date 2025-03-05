@@ -1,7 +1,7 @@
 export default {
   title: '🍍Pinia Entity Store',
   description: 'A lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM.',
-  base: 'https://github.com/MaloLebrin/pinia-entity-store',
+  base: '/',
   themeConfig: {
     footer: {
       message: 'Released under the MIT License.',
