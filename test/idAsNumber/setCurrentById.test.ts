@@ -117,6 +117,12 @@ describe('setCurrent action should return correct value', () => {
     expect(userStore.getFirstActive).toBeUndefined()
   })
 
+  it('if entity is not in store, setCurrentById return null', () => {
+    const userStore = useUserStore(pinia)
+
+    expect(userStore.setCurrentById(999)).toBeUndefined()
+  })
+
   afterEach(() => {
     const { resetState } = useUserStore()
 
