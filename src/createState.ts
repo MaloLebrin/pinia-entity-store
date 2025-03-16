@@ -6,6 +6,7 @@ export default function<T extends WithId>(): State<T & { $isDirty: boolean }> {
       byId: {},
       allIds: [],
       current: null,
+      currentById: null,
       active: [],
     },
   }

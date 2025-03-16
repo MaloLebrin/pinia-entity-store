@@ -5,6 +5,7 @@ export interface State<T> {
     byId: Record<Id, T & { $isDirty: boolean }>
     allIds: Id[]
     current: T & { $isDirty: boolean } | null
+    currentById: Id | null
     active: Id[]
   }
 }

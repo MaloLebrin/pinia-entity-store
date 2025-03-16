@@ -227,6 +227,13 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
       })
   }
 
+  /**
+   * Get currentById entity stored in state
+   */
+  function getCurrentById(state = currentState) {
+    return state.entities.currentById ? state.entities.byId[state.entities.currentById] : null
+  }
+
   return {
     findManyById,
     findOneById,
@@ -249,5 +256,6 @@ export default function createGetters<T extends WithId>(currentState: State<T>) 
     isAlreadyInStore,
     isDirty,
     search,
+    getCurrentById,
   }
 }

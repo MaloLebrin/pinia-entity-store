@@ -135,5 +135,22 @@ export default function createActions<T extends WithId>(state: State<T>) {
         this.setIsDirty(id)
       }
     },
+
+    /**
+     * set currentById entity
+     * @param payload
+     */
+    setCurrentById(payload: Id) {
+      if (state.entities.byId[payload]) {
+        state.entities.currentById = payload
+      }
+    },
+
+    /**
+     * remove currentById entity
+     */
+    removeCurrentById() {
+      state.entities.currentById = null
+    },
   }
 }

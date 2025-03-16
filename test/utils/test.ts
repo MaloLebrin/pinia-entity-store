@@ -3,4 +3,5 @@ export function defaultTestInit() {
   const pinia = createPinia()
   app.use(pinia)
   setActivePinia(pinia)
+  return pinia
 }
