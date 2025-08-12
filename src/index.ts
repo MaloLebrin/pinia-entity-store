@@ -5,7 +5,7 @@ import type { WithId } from '../types/WithId'
 import createActions from './createActions'
 import createGetters from './createGetters'
 import createState from './createState'
-
+import nuxtModule from './modules/entity-store'
 export type {
   ByIdParams,
   FilterFn,
@@ -18,4 +18,5 @@ export {
   createState,
   createGetters,
   createActions,
+  nuxtModule,
 }
