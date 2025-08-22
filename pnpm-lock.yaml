@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@antfu/utils':
+        specifier: ^9.2.0
+        version: 9.2.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^5.2.1
@@ -104,6 +108,7 @@ importers:
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.3.0)(yaml@2.8.1)
+
 packages:
 
   '@ampproject/remapping@2.3.0':
