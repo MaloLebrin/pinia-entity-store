@@ -155,8 +155,9 @@ pnpm test:zustand
 
 ### Getting Started
 - [Quick Start](./docs/getting-started/)
-- [Migration Guide](./docs/migration.md)
 - [Contributing](./docs/contributing.md)
+
+> **Note:** Documentation is provided as Markdown files for easy reading and contribution. Each package includes its own README with specific usage examples.
 
 ## 🤝 Contributing
 

@@ -26,10 +26,7 @@
     "test:zustand": "pnpm --filter @malolebrin/entity-store-zustand test",
     "type:check": "pnpm -r type:check",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
@@ -41,7 +38,6 @@
     "typescript": "^5.9.2",
     "unplugin-auto-import": "^20.0.0",
     "vite": "^7.1.3",
-    "vitepress": "^1.6.4",
     "vitest": "^3.2.4"
   },
   "volta": {
