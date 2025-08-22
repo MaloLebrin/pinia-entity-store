@@ -14,6 +14,12 @@ export { createActions } from './actions'
 // Getters
 export { createGetters } from './getters'
 
+// Import types and functions for local use
+import { createActions } from './actions'
+import { createGetters } from './getters'
+import { createState } from './state'
+import type { EntityStoreConfig, WithId } from './types'
+
 // Main factory function for creating entity stores
 export function createEntityStore<T extends WithId>(config?: EntityStoreConfig<T>) {
   const state = createState<T>(config)

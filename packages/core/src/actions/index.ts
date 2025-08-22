@@ -141,7 +141,8 @@ export function createActions<T extends WithId>(
      */
     updateField<K extends keyof T>(field: K, value: T[K], id: Id) {
       if (state.entities.byId[id]) {
-        state.entities.byId[id][field] = value
+        const entity = state.entities.byId[id]
+        entity[field] = value as any
         this.setIsDirty(id)
       }
     },

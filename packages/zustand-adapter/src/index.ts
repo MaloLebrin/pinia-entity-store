@@ -1,6 +1,6 @@
+import type { EntityStoreConfig, State, WithId } from '@malolebrin/entity-store-core'
+import { createActions, createGetters, createState } from '@malolebrin/entity-store-core'
 import type { StateCreator } from 'zustand'
-import { createActions, createGetters, createState } from '../../core'
-import type { EntityStoreConfig, State, WithId } from '../../core/types'
 
 export interface ZustandEntityStoreOptions<T extends WithId> extends EntityStoreConfig<T> {
   // Zustand-specific options
@@ -71,7 +71,7 @@ export function createZustandEntityStore<T extends WithId>(
 ): StateCreator<ZustandEntityStore<T>, [], [], ZustandEntityStore<T>> {
   const { name = 'entity-store', ...config } = options
   
-  return (set, get, store) => {
+  return (set, get, store): ZustandEntityStore<T> => {
     const initialState = createState<T>(config)
     const actions = createActions<T>(initialState, config)
     const getters = createGetters<T>(initialState)
@@ -109,20 +109,20 @@ export function createZustandEntityStore<T extends WithId>(
         payload.forEach(entity => get().createOne(entity))
       },
 
-      updateOne: (id: T['id'], payload: T) => {
+      updateOne: (id: T['id'], updates: Partial<T>) => {
         set((state) => {
           if (state.entities.byId[id]) {
             const previousEntity = { ...state.entities.byId[id] }
             const newState = { ...state }
             newState.entities.byId[id] = {
               ...newState.entities.byId[id],
-              ...payload,
+              ...updates,
             }
             
-            config?.onEntityUpdated?.(payload, previousEntity)
+            config?.onEntityUpdated?.(updates as T, previousEntity)
             return newState
           } else {
-            get().createOne(payload)
+            get().createOne(updates as T)
             return state
           }
         })
@@ -248,7 +248,8 @@ export function createZustandEntityStore<T extends WithId>(
         set((state) => {
           if (state.entities.byId[id]) {
             const newState = { ...state }
-            newState.entities.byId[id][field] = value
+            const entity = newState.entities.byId[id]
+            entity[field] = value as any
             return newState
           }
           return state
@@ -286,14 +287,15 @@ export function createZustandEntityStore<T extends WithId>(
           return acc
         }, {} as Record<T['id'], T & { $isDirty: boolean }>))
       },
-      getFirstWhere: (filter: (entity: T) => boolean) => {
+      getFirstWhere: (filter: (entity: T) => boolean): (T & { $isDirty: boolean }) | undefined => {
         const state = get()
-        return Object.values(state.entities.allIds.reduce((acc: Record<T['id'], T & { $isDirty: boolean }>, id: T['id']) => {
+        const filtered = state.entities.allIds.reduce((acc: Record<T['id'], T & { $isDirty: boolean }>, id: T['id']) => {
           const item = state.entities.byId[id]
           if (!filter(item)) return acc
           acc[id] = item
           return acc
-        }, {} as Record<T['id'], T & { $isDirty: boolean }>))[0]
+        }, {} as Record<T['id'], T & { $isDirty: boolean }>)
+        return Object.values(filtered)[0] as (T & { $isDirty: boolean }) | undefined
       },
       getIsEmpty: () => get().entities.allIds.length === 0,
       getIsNotEmpty: () => get().entities.allIds.length > 0,

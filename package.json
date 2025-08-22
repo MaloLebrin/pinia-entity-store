@@ -1,9 +1,9 @@
 {
-  "name": "@malolebrin/entity-store-core",
+  "name": "@malolebrin/entity-store-workspace",
   "version": "0.3.0",
-  "private": false,
+  "private": true,
   "packageManager": "pnpm@10.15.0",
-  "description": "A lightweight, agnostic entity store core for managing relational entities with support for multiple state managers.",
+  "description": "Entity Store - A lightweight, agnostic entity store with support for multiple state managers",
   "author": {
     "name": "Malo Lebrin",
     "email": "malolebrin@gmail.com"
@@ -13,41 +13,21 @@
     "type": "git",
     "url": "git://github.com/MaloLebrin/pinia-entity-store.git"
   },
-  "keywords": [
-    "entity-store",
-    "orm",
-    "typescript",
-    "database",
-    "normalizr",
-    "typed",
-    "ts",
-    "type",
-    "agnostic",
-    "state-management"
-  ],
-  "main": "dist/src/core/index.js",
-  "types": "dist/src/core/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
   "scripts": {
-    "build": "rm -rf dist/ && tsc --project tsconfig.build.json",
-    "build:packages": "pnpm -r build",
-    "type:check": "tsc --noEmit",
-    "test": "vitest",
-    "test:core": "vitest src/core",
-    "test:adapters": "vitest src/adapters",
-    "coverage": "vitest run --coverage",
+    "build": "pnpm -r build",
+    "build:core": "pnpm --filter @malolebrin/entity-store-core build",
+    "build:pinia": "pnpm --filter @malolebrin/entity-store-pinia build",
+    "build:zustand": "pnpm --filter @malolebrin/entity-store-zustand build",
+    "test": "pnpm -r test",
+    "test:core": "pnpm --filter @malolebrin/entity-store-core test",
+    "test:pinia": "pnpm --filter @malolebrin/entity-store-pinia test",
+    "test:zustand": "pnpm --filter @malolebrin/entity-store-zustand test",
+    "type:check": "pnpm -r type:check",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "rm -rf dist/ && npm run build",
-    "postversion": "git push && git push --tags",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
-  },
-  "dependencies": {
-    "@antfu/utils": "^9.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",

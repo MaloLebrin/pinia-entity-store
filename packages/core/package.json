@@ -1,8 +1,8 @@
 {
-  "name": "@malolebrin/entity-store-zustand",
+  "name": "@malolebrin/entity-store-core",
   "version": "0.3.0",
   "private": false,
-  "description": "Zustand adapter for @malolebrin/entity-store-core",
+  "description": "A lightweight, agnostic entity store core for managing relational entities with support for multiple state managers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -11,26 +11,27 @@
   "scripts": {
     "build": "rm -rf dist/ && tsc",
     "test": "vitest",
-    "test:watch": "vitest --watch",
     "type:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@malolebrin/entity-store-core": "workspace:*",
-    "zustand": "^5.0.0"
+    "@antfu/utils": "^9.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
-  "peerDependencies": {
-    "zustand": "^5.0.0"
-  },
   "keywords": [
-    "zustand",
     "entity-store",
-    "react",
-    "typescript"
+    "orm",
+    "typescript",
+    "database",
+    "normalizr",
+    "typed",
+    "ts",
+    "type",
+    "agnostic",
+    "state-management"
   ],
   "publishConfig": {
     "access": "public"

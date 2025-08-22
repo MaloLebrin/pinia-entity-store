@@ -1,6 +1,6 @@
+import type { EntityStoreConfig, WithId } from '@malolebrin/entity-store-core'
+import { createActions as createCoreActions, createGetters as createCoreGetters, createState as createCoreState } from '@malolebrin/entity-store-core'
 import type { DefineStoreOptions } from 'pinia'
-import { createActions, createGetters, createState } from '../../core'
-import type { EntityStoreConfig, WithId } from '../../core/types'
 
 export interface PiniaEntityStoreOptions<T extends WithId> extends EntityStoreConfig<T> {
   // Pinia-specific options
@@ -21,12 +21,12 @@ export function createPiniaEntityStore<T extends WithId>(
   
   return {
     id: storeName,
-    state: () => createState<T>(config),
+    state: () => createCoreState<T>(config),
     getters: {
-      ...createGetters<T>(createState<T>(config)),
+      ...createCoreGetters<T>(createCoreState<T>(config)),
     },
     actions: {
-      ...createActions<T>(createState<T>(config), config),
+      ...createCoreActions<T>(createCoreState<T>(config), config),
       
       // Pinia-specific methods
       resetState() {
@@ -73,7 +73,7 @@ export function createPiniaEntityStore<T extends WithId>(
         const entity = this.entities.byId[id]
         if (entity) {
           delete this.entities.byId[id]
-          this.entities.allIds = this.entities.allIds.filter(entityId => entityId !== id)
+          this.entities.allIds = this.entities.allIds.filter((entityId: T['id']) => entityId !== id)
           
           config?.onEntityDeleted?.(entity)
         }
@@ -109,13 +109,13 @@ export function createPiniaEntityStore<T extends WithId>(
 
 // Legacy compatibility functions
 export function createState<T extends WithId>(config?: EntityStoreConfig<T>) {
-  return createState<T>(config)
+  return createCoreState<T>(config)
 }
 
 export function createActions<T extends WithId>(state: any, config?: EntityStoreConfig<T>) {
-  return createActions<T>(state, config)
+  return createCoreActions<T>(state, config)
 }
 
 export function createGetters<T extends WithId>(state: any) {
-  return createGetters<T>(state)
+  return createCoreGetters<T>(state)
 }
