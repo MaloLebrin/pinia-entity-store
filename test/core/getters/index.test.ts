@@ -244,7 +244,7 @@ describe('Core Getters', () => {
         userState.entities.allIds.push(user.id)
       })
 
-      const missingEntities = userGetters.getMissingEntities(mockUsers)
+      const missingEntities = userGetters.getMissingEntities()(mockUsers)
       expect(missingEntities).toHaveLength(1)
       expect(missingEntities[0]).toEqual(mockUsers[2])
     })

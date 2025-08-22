@@ -168,7 +168,7 @@ describe('Core Actions', () => {
       const updates = { name: 'Updated Name' }
       actions.updateOne(user.id, updates)
 
-      expect(onUpdatedSpy).toHaveBeenCalledWith(updates, user)
+      expect(onUpdatedSpy).toHaveBeenCalledWith(updates, { ...user, $isDirty: false })
     })
   })
 
@@ -191,7 +191,7 @@ describe('Core Actions', () => {
       actions.createOne(user)
       actions.deleteOne(user.id)
 
-      expect(onDeletedSpy).toHaveBeenCalledWith(user)
+      expect(onDeletedSpy).toHaveBeenCalledWith({ ...user, $isDirty: false })
     })
   })
 
