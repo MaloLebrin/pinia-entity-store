@@ -1,0 +1,37 @@
+{
+  "name": "@malolebrin/entity-store-pinia",
+  "version": "0.3.0",
+  "private": false,
+  "description": "Pinia adapter for @malolebrin/entity-store-core",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "rm -rf dist/ && tsc",
+    "test": "vitest",
+    "type:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@malolebrin/entity-store-core": "workspace:*",
+    "pinia": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "vue": "^3.5.19"
+  },
+  "peerDependencies": {
+    "pinia": "^3.0.0",
+    "vue": "^3.0.0"
+  },
+  "keywords": [
+    "pinia",
+    "entity-store",
+    "vue",
+    "vue3",
+    "typescript"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@malolebrin/entity-store-zustand",
+  "version": "0.3.0",
+  "private": false,
+  "description": "Zustand adapter for @malolebrin/entity-store-core",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "rm -rf dist/ && tsc",
+    "test": "vitest",
+    "type:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@malolebrin/entity-store-core": "workspace:*",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "zustand": "^5.0.0"
+  },
+  "keywords": [
+    "zustand",
+    "entity-store",
+    "react",
+    "typescript"
+  ]
+}
