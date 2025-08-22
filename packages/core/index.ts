@@ -22,7 +22,7 @@ import type { EntityStoreConfig, WithId } from './types'
 
 // Main factory function for creating entity stores
 export function createEntityStore<T extends WithId>(config?: EntityStoreConfig<T>) {
-  const state = createState<T>(config)
+  const state = createState<T>()
   const actions = createActions<T>(state, config)
   const getters = createGetters<T>(state)
 

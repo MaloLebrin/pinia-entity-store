@@ -21,12 +21,12 @@ export function createPiniaEntityStore<T extends WithId>(
   
   return {
     id: storeName,
-    state: () => createCoreState<T>(config),
+    state: () => createCoreState<T>(),
     getters: {
-      ...createCoreGetters<T>(createCoreState<T>(config)),
+      ...createCoreGetters<T>(createCoreState<T>()),
     },
     actions: {
-      ...createCoreActions<T>(createCoreState<T>(config), config),
+      ...createCoreActions<T>(createCoreState<T>(), config),
       
       // Pinia-specific methods
       resetState() {
@@ -108,8 +108,8 @@ export function createPiniaEntityStore<T extends WithId>(
 }
 
 // Legacy compatibility functions
-export function createState<T extends WithId>(config?: EntityStoreConfig<T>) {
-  return createCoreState<T>(config)
+export function createState<T extends WithId>() {
+  return createCoreState<T>()
 }
 
 export function createActions<T extends WithId>(state: any, config?: EntityStoreConfig<T>) {

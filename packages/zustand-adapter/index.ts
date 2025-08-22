@@ -72,7 +72,7 @@ export function createZustandEntityStore<T extends WithId>(
   const { ...config } = options
   
   return (set, get): ZustandEntityStore<T> => {
-    const initialState = createState<T>(config)
+    const initialState = createState<T>()
     
     return {
       ...initialState,
