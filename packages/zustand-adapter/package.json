@@ -11,7 +11,9 @@
   "scripts": {
     "build": "rm -rf dist/ && tsc",
     "test": "vitest",
+    "test:run": "vitest --run",
     "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "type:check": "tsc --noEmit"
   },
   "dependencies": {

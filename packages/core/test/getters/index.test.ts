@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest'
-import { createUser, mockUsers } from '../../fixtures/entities'
+import { createUser, mockUsers } from '../fixtures/entities'
 
 // Mock functions for testing
 const createState = () => ({

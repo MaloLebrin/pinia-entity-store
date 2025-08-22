@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { createUser, mockUsers } from '../../fixtures/entities'
+import { createUser, mockUsers } from '../core/test/fixtures/entities'
 
 // Mock du module core pour éviter les problèmes d'import
 const mockCore = {

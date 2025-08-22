@@ -19,6 +19,8 @@
     "build:pinia": "pnpm --filter @malolebrin/entity-store-pinia build",
     "build:zustand": "pnpm --filter @malolebrin/entity-store-zustand build",
     "test": "pnpm -r test",
+    "test:run": "pnpm -r test:run",
+    "test:coverage": "pnpm -r test:coverage",
     "test:core": "pnpm --filter @malolebrin/entity-store-core test",
     "test:pinia": "pnpm --filter @malolebrin/entity-store-pinia test",
     "test:zustand": "pnpm --filter @malolebrin/entity-store-zustand test",

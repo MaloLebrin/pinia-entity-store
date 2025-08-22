@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { createProduct, createUser } from '../../fixtures/entities'
+import { createProduct, createUser } from '../fixtures/entities'
 
 describe('Core Types', () => {
   test('WithId interface should work with string IDs', () => {
