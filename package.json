@@ -40,9 +40,11 @@
     "lint:fix": "eslint . --fix",
     "prepare": "rm -rf dist/ && npm run build",
     "postversion": "git push && git push --tags",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "release:status": "./scripts/release.sh status",
+    "release:help": "./scripts/release.sh help",
+    "release:patch": "./scripts/release.sh create-release patch",
+    "release:minor": "./scripts/release.sh create-release minor",
+    "release:major": "./scripts/release.sh create-release major"
   },
   "dependencies": {
     "@antfu/utils": "^9.2.0"
