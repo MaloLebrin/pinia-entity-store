@@ -1,5 +1,15 @@
-import { describe, test, expect } from 'vitest'
-import { createUser } from '../fixtures/entities'
+import { describe, expect, test } from 'vitest';
+import { createUser } from '../fixtures/entities';
+
+// Helper function to generate test products
+function createProduct(data: { id: string; name: string; price: number }) {
+  return {
+    id: data.id,
+    name: data.name,
+    price: data.price,
+    $isDirty: false
+  }
+}
 
 // Tests d'intégration End-to-End qui simulent l'utilisation réelle
 // Note: Ces tests valident l'architecture complète sans dépendances externes

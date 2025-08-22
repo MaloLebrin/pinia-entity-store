@@ -1,5 +1,19 @@
-import { describe, test, expect } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { createUser } from '../fixtures/entities'
+
+// Helper function to generate test users
+function generateTestUsers(count: number = 5) {
+  return Array.from({ length: count }, (_, i) => 
+    createUser({ 
+      id: `user-${i + 1}`, 
+      name: `User ${i + 1}`, 
+      email: `user${i + 1}@example.com` 
+    })
+  )
+}
+
+// Type alias for test user
+type TestUser = ReturnType<typeof createUser>
 
 // Import des vraies fonctions du core (sans mocks cette fois)
 // Note: En attendant que les vrais modules soient disponibles, on utilise des implémentations simplifiées
@@ -219,7 +233,7 @@ function createRealEntityStore<T>(config?: CoreConfig<T>) {
 describe('Core Integration Tests - Real Implementation', () => {
   describe('Basic CRUD Operations', () => {
     test('should perform complete CRUD lifecycle', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       const user = createUser()
 
       // Create
@@ -245,8 +259,8 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should handle batch operations correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
-      const users = mockUsers.slice(0, 3)
+      const store = createRealEntityStore<TestUser>()
+      const users = generateTestUsers(3)
 
       // Batch create
       store.actions.createMany(users)
@@ -276,7 +290,7 @@ describe('Core Integration Tests - Real Implementation', () => {
 
   describe('State Management', () => {
     test('should manage current entity correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       const user1 = createUser({ id: 'user1', name: 'User 1' })
       const user2 = createUser({ id: 'user2', name: 'User 2' })
 
@@ -297,8 +311,8 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should manage active entities correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
-      const users = mockUsers.slice(0, 3)
+      const store = createRealEntityStore<TestUser>()
+      const users = generateTestUsers(3)
 
       store.actions.createMany(users)
 
@@ -323,7 +337,7 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should handle dirty state correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       const user = createUser()
 
       store.actions.createOne(user)
@@ -349,7 +363,7 @@ describe('Core Integration Tests - Real Implementation', () => {
 
   describe('Query Operations', () => {
     test('should filter entities correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       const users = [
         createUser({ id: '1', name: 'John Doe', age: 25 }),
         createUser({ id: '2', name: 'Jane Smith', age: 30 }),
@@ -374,8 +388,8 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should find missing entities correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
-      const allUsers = mockUsers.slice(0, 3)
+      const store = createRealEntityStore<TestUser>()
+      const allUsers = generateTestUsers(3)
       const existingUsers = allUsers.slice(0, 2)
 
       // Add only first 2 users
@@ -396,7 +410,7 @@ describe('Core Integration Tests - Real Implementation', () => {
 
   describe('Configuration and Hooks', () => {
     test('should validate entities correctly', () => {
-      const config: CoreConfig<typeof mockUsers[0]> = {
+      const config: CoreConfig<TestUser> = {
         validateEntity: user => user.age >= 18 && user.email.includes('@')
       }
 
@@ -420,7 +434,7 @@ describe('Core Integration Tests - Real Implementation', () => {
       const onUpdated = vi.fn()
       const onDeleted = vi.fn()
 
-      const config: CoreConfig<typeof mockUsers[0]> = {
+      const config: CoreConfig<TestUser> = {
         onEntityCreated: onCreated,
         onEntityUpdated: onUpdated,
         onEntityDeleted: onDeleted
@@ -455,7 +469,7 @@ describe('Core Integration Tests - Real Implementation', () => {
 
   describe('Error Handling and Edge Cases', () => {
     test('should handle operations on non-existent entities gracefully', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
 
       // Update non-existent
       expect(() => store.actions.updateOne('non-existent', { name: 'Test' })).not.toThrow()
@@ -471,7 +485,7 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should maintain data integrity during complex operations', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       // Créer des utilisateurs uniques pour éviter les doublons
       const users = Array.from({ length: 5 }, (_, i) => 
         createUser({ id: `unique-user-${i}`, name: `User ${i}` })
@@ -502,8 +516,8 @@ describe('Core Integration Tests - Real Implementation', () => {
     })
 
     test('should handle state reset correctly', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
-      const users = mockUsers.slice(0, 3)
+      const store = createRealEntityStore<TestUser>()
+      const users = generateTestUsers(3)
 
       // Populate store
       store.actions.createMany(users)
@@ -526,7 +540,7 @@ describe('Core Integration Tests - Real Implementation', () => {
 
   describe('Performance and Scalability', () => {
     test('should handle large datasets efficiently', () => {
-      const store = createRealEntityStore<typeof mockUsers[0]>()
+      const store = createRealEntityStore<TestUser>()
       const largeDataset = Array.from({ length: 1000 }, (_, i) => 
         createUser({ id: `user-${i}`, name: `User ${i}`, age: 20 + (i % 50) })
       )
