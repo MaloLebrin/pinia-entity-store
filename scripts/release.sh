@@ -92,34 +92,40 @@ create_release() {
     log_success "Release v$current_version créée avec succès sur $release_branch"
 }
 
-# Merge depuis main vers une branche de release
-merge_from_main() {
-    local release_branch=$1
+# Merge depuis une branche de release vers une autre
+merge_between_releases() {
+    local source_branch=$1
+    local target_branch=$2
     
-    if [ -z "$release_branch" ]; then
-        log_error "Usage: merge_from_main <release_branch>"
+    if [ -z "$source_branch" ] || [ -z "$target_branch" ]; then
+        log_error "Usage: merge_between_releases <source_branch> <target_branch>"
         exit 1
     fi
     
-    log_info "Merge depuis main vers $release_branch..."
+    log_info "Merge depuis $source_branch vers $target_branch..."
     
-    # Vérifier que la branche de release existe
-    if ! git show-ref --verify --quiet refs/heads/$release_branch; then
-        log_error "La branche $release_branch n'existe pas"
+    # Vérifier que les branches existent
+    if ! git show-ref --verify --quiet refs/heads/$source_branch; then
+        log_error "La branche source $source_branch n'existe pas"
         exit 1
     fi
     
-    # Basculer sur la branche de release
-    git checkout $release_branch
-    git pull origin $release_branch
+    if ! git show-ref --verify --quiet refs/heads/$target_branch; then
+        log_error "La branche cible $target_branch n'existe pas"
+        exit 1
+    fi
     
-    # Merger depuis main
-    git merge main --no-ff -m "Merge main into $release_branch"
+    # Basculer sur la branche cible
+    git checkout $target_branch
+    git pull origin $target_branch
+    
+    # Merger depuis la branche source
+    git merge $source_branch --no-ff -m "Merge $source_branch into $target_branch"
     
     # Pousser les changements
-    git push origin $release_branch
+    git push origin $target_branch
     
-    log_success "Merge depuis main vers $release_branch terminé"
+    log_success "Merge depuis $source_branch vers $target_branch terminé"
 }
 
 # Création d'un hotfix
@@ -161,7 +167,7 @@ show_help() {
     echo ""
     echo "Commandes:"
     echo "  create-release <patch|minor|major> <release_branch>  Créer une nouvelle release"
-    echo "  merge-main <release_branch>                          Merger main vers une branche de release"
+    echo "  merge-releases <source> <target>                     Merger entre branches de release"
     echo "  create-hotfix <release_branch> <hotfix_name>        Créer un hotfix"
     echo "  status                                              Afficher le statut des branches"
     echo "  help                                                 Afficher cette aide"
@@ -169,19 +175,13 @@ show_help() {
     echo "Exemples:"
     echo "  $0 create-release patch release/0.x.x"
     echo "  $0 create-release minor release/1.x.x"
-    echo "  $0 merge-main release/0.x.x"
+    echo "  $0 merge-releases release/0.x.x release/1.x.x"
     echo "  $0 create-hotfix release/0.x.x critical-bug-fix"
 }
 
 # Affichage du statut
 show_status() {
     log_info "Statut des branches de release:"
-    echo ""
-    
-    # Branche main
-    echo "🌿 main:"
-    git log --oneline -5 main
-    
     echo ""
     
     # Branches de release
@@ -210,8 +210,8 @@ main() {
         "create-release")
             create_release $2 $3
             ;;
-        "merge-main")
-            merge_from_main $2
+        "merge-releases")
+            merge_between_releases $2 $3
             ;;
         "create-hotfix")
             create_hotfix $2 $3

@@ -4,9 +4,10 @@
 
 ### Branches Principales
 
-- **`main`** - Développement principal, fonctionnalités expérimentales
 - **`release/0.x.x`** - Version 0.x.x (version actuelle, corrections et améliorations mineures)
 - **`release/1.x.x`** - Version 1.x.x (version majeure, nouvelles fonctionnalités)
+
+> **Note :** La branche `main` est obsolète avec cette stratégie. Le développement se fait directement sur les branches de release appropriées.
 
 ### Branches de Développement
 
@@ -54,33 +55,33 @@
 
 ## 🔄 Processus de Release
 
-### 1. Développement sur `main`
+### 1. Développement direct sur les branches de release
 
-```bash
-git checkout main
-git pull origin main
-# Développer les nouvelles fonctionnalités
-git commit -m "feat: nouvelle fonctionnalité"
-git push origin main
-```
-
-### 2. Merge vers les branches de release
-
-#### Pour la version 0.x.x
+#### Pour la version 0.x.x (corrections et améliorations mineures)
 ```bash
 git checkout release/0.x.x
 git pull origin release/0.x.x
-git merge main
-# Résoudre les conflits si nécessaire
+# Développer les corrections/améliorations
+git commit -m "fix: correction de bug"
 git push origin release/0.x.x
 ```
 
-#### Pour la version 1.x.x
+#### Pour la version 1.x.x (nouvelles fonctionnalités)
 ```bash
 git checkout release/1.x.x
 git pull origin release/1.x.x
-git merge main
-# Résoudre les conflits si nécessaire
+# Développer les nouvelles fonctionnalités
+git commit -m "feat: nouvelle fonctionnalité"
+git push origin release/1.x.x
+```
+
+### 2. Synchronisation entre branches de release (optionnel)
+
+Si vous voulez porter des corrections de 0.x.x vers 1.x.x :
+```bash
+git checkout release/1.x.x
+git pull origin release/1.x.x
+git cherry-pick <commit-hash-from-0.x.x>
 git push origin release/1.x.x
 ```
 
@@ -129,7 +130,7 @@ Les branches `release/*` doivent être protégées :
 ### Migration 0.x.x → 1.x.x
 
 1. **Phase de préparation :**
-   - Développer sur `main`
+   - Développer sur `release/1.x.x`
    - Tester la compatibilité
    - Créer un guide de migration
 
