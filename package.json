@@ -45,7 +45,8 @@
     "release:patch": "./scripts/release.sh create-release patch",
     "release:minor": "./scripts/release.sh create-release minor",
     "release:major": "./scripts/release.sh create-release major",
-    "release:merge": "./scripts/release.sh merge-releases"
+    "release:merge": "./scripts/release.sh merge-releases",
+    "set-default-branch": "./scripts/set-default-branch.sh"
   },
   "dependencies": {
     "@antfu/utils": "^9.2.0"

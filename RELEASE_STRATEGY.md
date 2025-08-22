@@ -110,6 +110,23 @@ git push origin release/0.x.x --tags
 
 ## 🔧 Configuration des Branches
 
+### Changement de la branche par défaut
+
+Pour changer la branche par défaut de `main` vers une branche de release :
+
+```bash
+# Via le script automatisé
+npm run set-default-branch release/0.x.x
+
+# Ou manuellement
+./scripts/set-default-branch.sh release/0.x.x
+```
+
+**Important :** N'oubliez pas de changer la branche par défaut sur GitHub :
+1. GitHub → Settings → Branches
+2. Changer "Default branch" vers `release/0.x.x`
+3. Confirmer le changement
+
 ### Protection des branches de release
 
 Les branches `release/*` doivent être protégées :
