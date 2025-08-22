@@ -88,7 +88,7 @@ const mockCore = {
 }
 
 // Mock de l'adaptateur Pinia
-const createPiniaEntityStore = (useStore: any) => {
+const createPiniaEntityStore = () => {
   const state = mockCore.createState()
   const actions = mockCore.createActions(state)
   const getters = mockCore.createGetters(state)
@@ -268,7 +268,6 @@ describe('Pinia Adapter', () => {
     })
 
     test('should find missing IDs', () => {
-      const existingIds = mockUsers.slice(0, 2).map(u => u.id)
       const allIds = mockUsers.map(u => u.id)
       const missingIds = store.getMissingIds()(allIds)
       
@@ -277,7 +276,6 @@ describe('Pinia Adapter', () => {
     })
 
     test('should find missing entities', () => {
-      const existingEntities = mockUsers.slice(0, 2)
       const allEntities = mockUsers
       const missingEntities = store.getMissingEntities()(allEntities)
       

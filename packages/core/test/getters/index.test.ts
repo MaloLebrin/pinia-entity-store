@@ -99,15 +99,11 @@ const createGetters = (state: any) => {
 
 describe('Core Getters', () => {
   let userState: any
-  let productState: any
   let userGetters: any
-  let productGetters: any
 
   beforeEach(() => {
     userState = createState()
-    productState = createState()
     userGetters = createGetters(userState)
-    productGetters = createGetters(productState)
   })
 
   describe('Basic Getters', () => {

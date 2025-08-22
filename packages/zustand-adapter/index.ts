@@ -1,5 +1,5 @@
 import type { EntityStoreConfig, State, WithId } from '@malolebrin/entity-store-core'
-import { createActions, createGetters, createState } from '@malolebrin/entity-store-core'
+import { createState } from '@malolebrin/entity-store-core'
 import type { StateCreator } from 'zustand'
 
 export interface ZustandEntityStoreOptions<T extends WithId> extends EntityStoreConfig<T> {
@@ -69,18 +69,16 @@ export interface ZustandEntityStore<T extends WithId> extends State<T & { $isDir
 export function createZustandEntityStore<T extends WithId>(
   options: ZustandEntityStoreOptions<T> = {}
 ): StateCreator<ZustandEntityStore<T>, [], [], ZustandEntityStore<T>> {
-  const { name = 'entity-store', ...config } = options
+  const { ...config } = options
   
-  return (set, get, store): ZustandEntityStore<T> => {
+  return (set, get): ZustandEntityStore<T> => {
     const initialState = createState<T>(config)
-    const actions = createActions<T>(initialState, config)
-    const getters = createGetters<T>(initialState)
     
     return {
       ...initialState,
       
       // Actions
-      createOne: (payload: T) => {
+      createOne: payload => {
         if (config?.validateEntity) {
           const validation = config.validateEntity(payload)
           if (typeof validation === 'string') {
@@ -91,7 +89,7 @@ export function createZustandEntityStore<T extends WithId>(
           }
         }
 
-        set((state) => {
+        set(state => {
           const entityWithDirty = { ...payload, $isDirty: false }
           const newState = { ...state }
           
@@ -105,12 +103,12 @@ export function createZustandEntityStore<T extends WithId>(
         })
       },
 
-      createMany: (payload: T[]) => {
+      createMany: payload => {
         payload.forEach(entity => get().createOne(entity))
       },
 
       updateOne: (id: T['id'], updates: Partial<T>) => {
-        set((state) => {
+        set(state => {
           if (state.entities.byId[id]) {
             const previousEntity = { ...state.entities.byId[id] }
             const newState = { ...state }
@@ -128,12 +126,12 @@ export function createZustandEntityStore<T extends WithId>(
         })
       },
 
-      updateMany: (payload: T[]) => {
+      updateMany: payload => {
         payload.forEach(entity => get().updateOne(entity.id, entity))
       },
 
-      deleteOne: (id: T['id']) => {
-        set((state) => {
+      deleteOne: id => {
+        set(state => {
           const entity = state.entities.byId[id]
           if (entity) {
             const newState = { ...state }
@@ -147,12 +145,12 @@ export function createZustandEntityStore<T extends WithId>(
         })
       },
 
-      deleteMany: (ids: T['id'][]) => {
+      deleteMany: ids => {
         ids.forEach(id => get().deleteOne(id))
       },
 
-      setCurrent: (payload: T) => {
-        set((state) => ({
+      setCurrent: payload => {
+        set(state => ({
           ...state,
           entities: {
             ...state.entities,
@@ -162,7 +160,7 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       removeCurrent: () => {
-        set((state) => ({
+        set(state => ({
           ...state,
           entities: {
             ...state.entities,
@@ -171,8 +169,8 @@ export function createZustandEntityStore<T extends WithId>(
         }))
       },
 
-      setCurrentById: (id: T['id']) => {
-        set((state) => ({
+      setCurrentById: id => {
+        set(state => ({
           ...state,
           entities: {
             ...state.entities,
@@ -182,7 +180,7 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       removeCurrentById: () => {
-        set((state) => ({
+        set(state => ({
           ...state,
           entities: {
             ...state.entities,
@@ -191,8 +189,8 @@ export function createZustandEntityStore<T extends WithId>(
         }))
       },
 
-      setActive: (id: T['id']) => {
-        set((state) => {
+      setActive: id => {
+        set(state => {
           if (!state.entities.active.includes(id)) {
             return {
               ...state,
@@ -207,7 +205,7 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       resetActive: () => {
-        set((state) => ({
+        set(state => ({
           ...state,
           entities: {
             ...state.entities,
@@ -216,8 +214,8 @@ export function createZustandEntityStore<T extends WithId>(
         }))
       },
 
-      setIsDirty: (id: T['id']) => {
-        set((state) => {
+      setIsDirty: id => {
+        set(state => {
           if (state.entities.byId[id]) {
             const newState = { ...state }
             newState.entities.byId[id] = {
@@ -230,8 +228,8 @@ export function createZustandEntityStore<T extends WithId>(
         })
       },
 
-      setIsNotDirty: (id: T['id']) => {
-        set((state) => {
+      setIsNotDirty: id => {
+        set(state => {
           if (state.entities.byId[id]) {
             const newState = { ...state }
             newState.entities.byId[id] = {
@@ -245,7 +243,7 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       updateField: <K extends keyof T>(field: K, value: T[K], id: T['id']) => {
-        set((state) => {
+        set(state => {
           if (state.entities.byId[id]) {
             const newState = { ...state }
             const entity = newState.entities.byId[id]
@@ -257,8 +255,8 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       // Getters (computed from current state)
-      getOne: (id: T['id']) => get().entities.byId[id],
-      getMany: (ids: T['id'][]) => ids.map(id => get().entities.byId[id]).filter(Boolean),
+      getOne: id => get().entities.byId[id],
+      getMany: ids => ids.map(id => get().entities.byId[id]).filter(Boolean),
       getAll: () => get().entities.byId,
       getAllArray: () => Object.values(get().entities.byId),
       getAllIds: () => get().entities.allIds,
@@ -269,7 +267,7 @@ export function createZustandEntityStore<T extends WithId>(
       },
       getActive: () => get().entities.active,
       getFirstActive: () => get().entities.active[0],
-      getWhere: (filter: (entity: T) => boolean) => {
+      getWhere: filter => {
         const state = get()
         return state.entities.allIds.reduce((acc: Record<T['id'], T & { $isDirty: boolean }>, id: T['id']) => {
           const item = state.entities.byId[id]
@@ -278,7 +276,7 @@ export function createZustandEntityStore<T extends WithId>(
           return acc
         }, {} as Record<T['id'], T & { $isDirty: boolean }>)
       },
-      getWhereArray: (filter: (entity: T) => boolean) => {
+      getWhereArray: filter => {
         const state = get()
         return Object.values(state.entities.allIds.reduce((acc: Record<T['id'], T & { $isDirty: boolean }>, id: T['id']) => {
           const item = state.entities.byId[id]
@@ -287,7 +285,7 @@ export function createZustandEntityStore<T extends WithId>(
           return acc
         }, {} as Record<T['id'], T & { $isDirty: boolean }>))
       },
-      getFirstWhere: (filter: (entity: T) => boolean): (T & { $isDirty: boolean }) | undefined => {
+      getFirstWhere: filter => {
         const state = get()
         const filtered = state.entities.allIds.reduce((acc: Record<T['id'], T & { $isDirty: boolean }>, id: T['id']) => {
           const item = state.entities.byId[id]
@@ -304,14 +302,14 @@ export function createZustandEntityStore<T extends WithId>(
         const filteredIds = ids.filter(id => !state.entities.allIds.includes(id))
         return canHaveDuplicates ? filteredIds : [...new Set(filteredIds)]
       },
-      getMissingEntities: (entities: T[]) => {
+      getMissingEntities: entities => {
         const state = get()
         return entities?.length > 0 ? entities.filter(entity => !state.entities.allIds.includes(entity.id)) : []
       },
-      isAlreadyInStore: (id: T['id']) => get().entities.allIds.includes(id),
-      isAlreadyActive: (id: T['id']) => get().entities.active.includes(id),
-      isDirty: (id: T['id']) => get().entities.byId[id]?.$isDirty ?? false,
-      search: (field: string) => {
+      isAlreadyInStore: id => get().entities.allIds.includes(id),
+      isAlreadyActive: id => get().entities.active.includes(id),
+      isDirty: id => get().entities.byId[id]?.$isDirty ?? false,
+      search: field => {
         const state = get()
         return Object.values(state.entities.byId).filter(item => {
           const regex = new RegExp(field, 'i')
@@ -325,8 +323,8 @@ export function createZustandEntityStore<T extends WithId>(
       },
 
       // Legacy compatibility
-      findOneById: (id: T['id']) => get().entities.byId[id],
-      findManyById: (ids: T['id'][]) => ids.map(id => get().entities.byId[id]).filter(Boolean),
+      findOneById: id => get().entities.byId[id],
+      findManyById: ids => ids.map(id => get().entities.byId[id]).filter(Boolean),
 
       // Utility methods
       reset: () => set(initialState),

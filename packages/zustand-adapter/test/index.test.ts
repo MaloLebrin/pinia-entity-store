@@ -271,7 +271,6 @@ describe('Zustand Adapter', () => {
     })
 
     test('should find missing IDs', () => {
-      const existingIds = mockUsers.slice(0, 2).map(u => u.id)
       const allIds = mockUsers.map(u => u.id)
       const missingIds = store.getMissingIds()(allIds)
       
@@ -280,7 +279,6 @@ describe('Zustand Adapter', () => {
     })
 
     test('should find missing entities', () => {
-      const existingEntities = mockUsers.slice(0, 2)
       const allEntities = mockUsers
       const missingEntities = store.getMissingEntities()(allEntities)
       

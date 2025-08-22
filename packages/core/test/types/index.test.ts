@@ -44,9 +44,9 @@ describe('Core Types', () => {
   test('EntityStoreConfig should accept validation functions', () => {
     const config = {
       validateEntity: (user: any) => user.email.includes('@'),
-      onEntityCreated: (user: any) => console.log('Created:', user),
-      onEntityUpdated: (user: any, previous: any) => console.log('Updated:', user, previous),
-      onEntityDeleted: (user: any) => console.log('Deleted:', user)
+      onEntityCreated: () => { /* Created */ },
+      onEntityUpdated: () => { /* Updated */ },
+      onEntityDeleted: () => { /* Deleted */ }
     }
 
     expect(config.validateEntity).toBeDefined()

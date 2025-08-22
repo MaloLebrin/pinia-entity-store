@@ -1,5 +1,5 @@
-import { describe, test, expect, beforeEach, vi } from 'vitest'
-import { createUser, createProduct, mockUsers, mockProducts } from '../fixtures/entities'
+import { describe, test, expect } from 'vitest'
+import { createUser } from '../fixtures/entities'
 
 // Tests de compatibilité pour valider la rétrocompatibilité et l'interopérabilité
 

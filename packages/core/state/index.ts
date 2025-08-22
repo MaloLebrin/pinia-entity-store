@@ -1,6 +1,6 @@
-import type { EntityStoreConfig, State, WithId } from '../types'
+import type { State, WithId } from '../types'
 
-export function createState<T extends WithId>(config?: EntityStoreConfig<T>): State<T & { $isDirty: boolean }> {
+export function createState<T extends WithId>(): State<T & { $isDirty: boolean }> {
   return {
     entities: {
       byId: {},

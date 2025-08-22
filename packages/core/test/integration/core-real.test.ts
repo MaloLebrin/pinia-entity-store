@@ -1,5 +1,5 @@
-import { describe, test, expect, beforeEach, vi } from 'vitest'
-import { createUser, createProduct, mockUsers, mockProducts } from '../fixtures/entities'
+import { describe, test, expect } from 'vitest'
+import { createUser } from '../fixtures/entities'
 
 // Import des vraies fonctions du core (sans mocks cette fois)
 // Note: En attendant que les vrais modules soient disponibles, on utilise des implémentations simplifiées
@@ -397,7 +397,7 @@ describe('Core Integration Tests - Real Implementation', () => {
   describe('Configuration and Hooks', () => {
     test('should validate entities correctly', () => {
       const config: CoreConfig<typeof mockUsers[0]> = {
-        validateEntity: (user) => user.age >= 18 && user.email.includes('@')
+        validateEntity: user => user.age >= 18 && user.email.includes('@')
       }
 
       const store = createRealEntityStore(config)

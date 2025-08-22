@@ -1,5 +1,5 @@
-import { describe, test, expect, beforeEach, vi } from 'vitest'
-import { createUser, createProduct, mockUsers, mockProducts } from '../fixtures/entities'
+import { describe, test, expect } from 'vitest'
+import { createUser } from '../fixtures/entities'
 
 // Tests d'intégration End-to-End qui simulent l'utilisation réelle
 // Note: Ces tests valident l'architecture complète sans dépendances externes
@@ -403,7 +403,7 @@ describe('End-to-End Integration Tests', () => {
         private queue: Array<{ id: string, operation: () => void, resolve: (value: any) => void }> = []
 
         private async acquireLock(id: string): Promise<void> {
-          return new Promise((resolve) => {
+          return new Promise(resolve => {
             if (!this.locks.has(id)) {
               this.locks.add(id)
               resolve(undefined)

@@ -77,15 +77,11 @@ const createActions = (state: any, config?: any) => {
 
 describe('Core Actions', () => {
   let userState: any
-  let productState: any
   let userActions: any
-  let productActions: any
 
   beforeEach(() => {
     userState = createState()
-    productState = createState()
     userActions = createActions(userState)
-    productActions = createActions(productState)
   })
 
   describe('createOne', () => {
