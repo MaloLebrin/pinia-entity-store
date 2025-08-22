@@ -8,157 +8,161 @@
 
 [![Node.js Package](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml)
 
-A fully typed lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
+# Entity Store
 
-## Roadmap:
+A lightweight, agnostic entity store for managing relational entities with support for multiple state managers.
 
- * [x] Add is Already in store and Already active getters
- * [x] Fully tested plugin  with [Vitest](https://vitest.dev/)
- * [ ] Make Pinia entity store as [plugin for Pinia](https://pinia.vuejs.org/core-concepts/plugins.html)
- * [ ] Create documentation
- * [ ] Create offical release
+## 🏗️ Architecture
 
-## Contributions:
+This project is organized as a monorepo with the following packages:
 
-👍🎉 First off, thanks for taking the time to contribute! 🎉👍
+- **`@malolebrin/entity-store-core`** - The agnostic core that provides entity management logic
+- **`@malolebrin/entity-store-pinia`** - Pinia adapter for Vue.js applications
+- **`@malolebrin/entity-store-zustand`** - Zustand adapter for React applications
 
-### How Can I Contribute?
+## 📦 Packages
 
-#### Pull Requests
+### Core Package (`@malolebrin/entity-store-core`)
 
-The process described here has several goals:
+The core package provides the foundation for entity management:
 
-- Maintain pinia-entity-store's quality
-- Fix problems that are important to users
-- Enable a sustainable system for pinia-entity-store's maintainers to review contributions
+- **State Management**: Normalized entity storage with `byId` and `allIds` patterns
+- **Actions**: CRUD operations, entity lifecycle hooks, and validation
+- **Getters**: Query methods, filtering, and computed properties
+- **Configuration**: Custom validation, lifecycle hooks, and extensibility options
 
-You can create PR as your wish to fix bug, and create features
+### Pinia Adapter (`@malolebrin/entity-store-pinia`)
 
-
-## How to use It ?
-
-🔴 At the moment the package is not released yet, because it is still young.
-It has no published release on github.
-You can obviously make changes to contribute to the projects in order to advance the roadmap
-
-✅ However the features of Pinia Entity Store can be used without concern. They are tested and already used in some projects
-
-### Install package
-
-```
-npm i @malolebrin/pinia-entity-store
-
-// or
-
-yarn add @malolebrin/pinia-entity-store
-
-// or
-
-pnpm i @malolebrin/pinia-entity-store
-
-```
-
-
-### Create the state
-
-```ts
-// userState.ts
-
-import { createState } from '@malolebrin/pinia-entity-store'
-import type { UserEntity } from '~/types'
-
-export const userState = createState<UserEntity>()
-```
-
-The state will look like this:
-
-```ts
-  entities: {
-    byId: Record<number, UserEntity>,
-    allIds: number[]
-    current: UserEntity | null
-    active: number[]
-  }
-```
-
-You can of course extend the state as much and as you want.
-
-### Create the store
-
-
-```ts
-// useUserStore.ts
-import { createActions, createGetters } from '@malolebrin/pinia-entity-store'
-import type { UserEntity } from '../../types'
-import { userState } from './userState.ts'
+```typescript
+import { createPiniaEntityStore } from '@malolebrin/entity-store-pinia'
 
 export const useUserStore = defineStore('user', {
-  state: () => ({ ...userState }),
-
-  getters: {
-    ...createGetters<UserEntity>(userState),
-
-    // your customs getters bellow
-  },
-
-  actions: {
-    // Actions from Pinia-entity-store
-    ...createActions<UserEntity>(userState),
-
-    // your customs actions bellow
-    resetState() {
-      this.$state = defaultState()
-    }
-  }
+  ...createPiniaEntityStore<UserEntity>({
+    validateEntity: (user) => user.name.length > 0,
+    onEntityCreated: (user) => console.log('User created:', user)
+  })
 })
 ```
 
-## List of getters:
+### Zustand Adapter (`@malolebrin/entity-store-zustand`)
 
+```typescript
+import { createZustandEntityStore } from '@malolebrin/entity-store-zustand'
+import { create } from 'zustand'
 
-- `getOne`: return a single item from the state by its id.
-- `getMany`: return a array of items from the state by their ids.
-- `getAll`: return all entities as Record<number, Entity>
-- `getAllArray`: return all entities in the store as Entity[]
-- `getAllIds`: return all ids for entities in the store as number[]
-- `getMissingIds`: returns a list of missing IDs in the store compared to the ids passed to the getter. with an option to filter out duplicates
-- `getMissingEntities`: returns a list of missing entities in the store compared to the entities passed to the getter.
-- `getWhere`: Get all the items that pass the given filter callback as a dictionnary of values.
-```ts
-const userStore = useUserStore()
-userStore.getWhere(user => user.lastName === 'Doe')
+const useUserStore = create(
+  createZustandEntityStore<UserEntity>({
+    validateEntity: (user) => user.name.length > 0,
+    onEntityCreated: (user) => console.log('User created:', user)
+  })
+)
 ```
 
-- `getWhereArray`: Get all the items that pass the given filter callback as an array of values
-```ts
-const userStore = useUserStore()
-userStore.getWhereArray(user => user.lastName === 'Doe')
+## 🚀 Getting Started
+
+### Installation
+
+```bash
+# Core package
+npm install @malolebrin/entity-store-core
+
+# Pinia adapter
+npm install @malolebrin/entity-store-pinia
+
+# Zustand adapter
+npm install @malolebrin/entity-store-zustand
 ```
-- `getIsEmpty`: Return a boolean indicating wether or not the state is empty (contains no items).
-- `getIsNotEmpty`: Return a boolean indicating wether or not the state is not empty (contains items).
-- `getCurrent`: current entity stored in state.
-- `getActive`: array of active entities stored in state.
-- `getFirstActive`: first entity get from array of active entities stored in state.
-- `ìsAlreadyInStore(id: number)`: Return a boolean indicating wether or not the state contains entity.
-- `isAlreadyActive(id: number)`: Return a boolean indicating wether or not the active state contains entity.
-- `isDirty(id: number)`: Return a boolean indicating wether or not the entity has been modified.
 
-## List of actions:
+### Basic Usage
 
-- `createOne`: create single entity in store
-- `createMany`: Create Many entity in store
-- `setCurrent`: setCurrent used entity
-- `removeCurrent`: remove current used entity
-- `updateOne`: update the entity in the store if it exists otherwise create the entity
-- `updateMany`: update many entities in the store if they exist otherwise create them
-- `deleteOne`: Delete one entity in Store
-- `deleteMany`: delete many entities in Store
-- `setActive`: add entity in active array
-- `resetActive`: remove all active entities
-- `setIsDirty(id: number)`: set $isDirty property to true to know if the entity has been modified
-- `setIsNotDirty(id: number)`: set $isDirty property to false to know if the entity has been modified or not
-- `updateField`: update field's value of an entity
+```typescript
+import { createEntityStore } from '@malolebrin/entity-store-core'
 
-## License
+interface User {
+  id: string
+  name: string
+  email: string
+}
 
-[MIT](http://opensource.org/licenses/MIT)
+const userStore = createEntityStore<User>({
+  validateEntity: (user) => user.name.length > 0 && user.email.includes('@'),
+  onEntityCreated: (user) => console.log('User created:', user)
+})
+
+// Add users
+userStore.createOne({ id: '1', name: 'John', email: 'john@example.com' })
+
+// Query users
+const user = userStore.getOne('1')
+const allUsers = userStore.getAllArray()
+```
+
+## 🔧 Configuration
+
+Each package supports configuration options:
+
+### Core Configuration
+
+```typescript
+interface EntityStoreConfig<T> {
+  validateEntity?: (entity: T) => boolean | string
+  onEntityCreated?: (entity: T) => void
+  onEntityUpdated?: (entity: T, previousEntity: T) => void
+  onEntityDeleted?: (entity: T) => void
+  customDirtyCheck?: (entity: T) => boolean
+  generateId?: () => Id
+}
+```
+
+### Adapter-Specific Configuration
+
+Each adapter extends the core configuration with framework-specific options.
+
+## 🧪 Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build all packages
+pnpm build
+
+# Build specific package
+pnpm build:core
+pnpm build:pinia
+pnpm build:zustand
+
+# Run tests
+pnpm test
+
+# Run tests for specific package
+pnpm test:core
+pnpm test:pinia
+pnpm test:zustand
+```
+
+## 📚 Documentation
+
+### Core Module
+- [Core Overview](./docs/core/README.md)
+- [API Reference](./docs/core/api/README.md)
+- [Types](./docs/core/api/types.md)
+- [Examples](./docs/core/examples/)
+
+### Adapters
+- [Pinia Adapter](./packages/pinia-adapter/README.md)
+- [Zustand Adapter](./packages/zustand-adapter/README.md)
+
+### Getting Started
+- [Quick Start](./docs/getting-started/)
+- [Contributing](./docs/contributing.md)
+
+> **Note:** Documentation is provided as Markdown files for easy reading and contribution. Each package includes its own README with specific usage examples.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our contributing guidelines and ensure all tests pass before submitting a pull request.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
