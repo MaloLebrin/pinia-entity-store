@@ -143,9 +143,20 @@ pnpm test:zustand
 
 ## 📚 Documentation
 
-- [Core Package Documentation](./packages/core/README.md)
-- [Pinia Adapter Documentation](./packages/pinia-adapter/README.md)
-- [Zustand Adapter Documentation](./packages/zustand-adapter/README.md)
+### Core Module
+- [Core Overview](./docs/core/README.md)
+- [API Reference](./docs/core/api/README.md)
+- [Types](./docs/core/api/types.md)
+- [Examples](./docs/core/examples/)
+
+### Adapters
+- [Pinia Adapter](./packages/pinia-adapter/README.md)
+- [Zustand Adapter](./packages/zustand-adapter/README.md)
+
+### Getting Started
+- [Quick Start](./docs/getting-started/)
+- [Migration Guide](./docs/migration.md)
+- [Contributing](./docs/contributing.md)
 
 ## 🤝 Contributing
 
