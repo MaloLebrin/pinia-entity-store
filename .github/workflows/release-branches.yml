@@ -24,7 +24,7 @@ jobs:
           version: '10.15.0'
           
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'pnpm'
@@ -57,7 +57,7 @@ jobs:
           version: '10.15.0'
           
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'pnpm'
@@ -89,7 +89,7 @@ jobs:
           version: '10.15.0'
           
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'pnpm'
@@ -118,7 +118,7 @@ jobs:
           version: '10.15.0'
           
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'pnpm'
