@@ -1,29 +1,115 @@
-name: Create-Release
+name: Release Packages
 
 on:
   push:
-    # Sequence of patterns matched against refs/tags
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*'
 
 jobs:
-  build:
-    name: Create Release
+  release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    
     steps:
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v5
-      - name: 📚Build Changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v5
-      - name: 🚀 Create Release
-        id: create_release
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.6.0'
+          cache: 'npm'
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build packages
+        run: pnpm build
+      
+      - name: Run tests
+        run: pnpm test:run
+      
+      - name: Type check
+        run: pnpm type:check
+      
+      - name: Lint
+        run: pnpm lint
+      
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version_clean=${VERSION#v}" >> $GITHUB_OUTPUT
+      
+      - name: Update package versions
+        run: |
+          cd packages/core
+          pnpm version ${{ steps.get_version.outputs.version_clean }} --no-git-tag-version
+          
+          cd ../pinia-adapter
+          pnpm version ${{ steps.get_version.outputs.version_clean }} --no-git-tag-version
+          
+          cd ../zustand-adapter
+          pnpm version ${{ steps.get_version.outputs.version_clean }} --no-git-tag-version
+      
+      - name: Build packages with new versions
+        run: pnpm build
+      
+      - name: Publish to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          
+          cd packages/core
+          pnpm publish --no-git-checks --access public
+          
+          cd ../pinia-adapter
+          pnpm publish --no-git-checks --access public
+          
+          cd ../zustand-adapter
+          pnpm publish --no-git-checks --access public
+      
+      - name: Create GitHub Release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{steps.build_changelog.outputs.changelog}}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
           draft: false
           prerelease: false
+          body: |
+            ## What's Changed
+            
+            This release includes updates to all packages:
+            
+            - **@malolebrin/entity-store-core**: ${{ steps.get_version.outputs.version_clean }}
+            - **@malolebrin/entity-store-pinia**: ${{ steps.get_version.outputs.version_clean }}
+            - **@malolebrin/entity-store-zustand**: ${{ steps.get_version.outputs.version_clean }}
+            
+            ## Installation
+            
+            ```bash
+            # Core package
+            npm install @malolebrin/entity-store-core
+            
+            # Pinia adapter
+            npm install @malolebrin/entity-store-pinia
+            
+            # Zustand adapter
+            npm install @malolebrin/entity-store-zustand
+            ```
+            
+            ## Documentation
+            
+            Visit our [documentation](https://github.com/MaloLebrin/pinia-entity-store) for more information.

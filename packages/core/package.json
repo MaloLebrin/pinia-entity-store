@@ -1,0 +1,41 @@
+{
+  "name": "@malolebrin/entity-store-core",
+  "version": "0.3.0",
+  "private": false,
+  "description": "A lightweight, agnostic entity store core for managing relational entities with support for multiple state managers.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "rm -rf dist/ && tsc",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:coverage": "vitest --coverage",
+    "type:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@antfu/utils": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "keywords": [
+    "entity-store",
+    "orm",
+    "typescript",
+    "database",
+    "normalizr",
+    "typed",
+    "ts",
+    "type",
+    "agnostic",
+    "state-management"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
