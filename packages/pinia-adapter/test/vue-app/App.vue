@@ -50,6 +50,7 @@
       <button @click="resetStore">Réinitialiser le store</button>
       <button @click="createSampleUsers">Créer des utilisateurs de test</button>
       <button @click="toggleAllDirty">Basculer l'état modifié</button>
+      <button @click="runPackageTests" class="test-btn">🧪 Tester notre package</button>
     </div>
 
     <!-- Statistiques -->
@@ -96,6 +97,42 @@ const createUser = () => {
     
     // Réinitialiser le formulaire
     newUser.value = { name: '', email: '', age: 25 }
+  }
+}
+
+// Test de notre package
+const runPackageTests = async () => {
+  try {
+    console.log('🧪 Running package tests...')
+    
+    // Import dynamique de notre package
+    const { createPiniaEntityStore } = await import('../../index')
+    
+    console.log('✅ Package imported successfully!')
+    console.log('📋 createPiniaEntityStore type:', typeof createPiniaEntityStore)
+    
+    // Créer un store avec notre package
+    const storeOptions = createPiniaEntityStore({
+      storeName: 'test-store',
+      validateEntity: (entity: any) => {
+        return !!(entity.name && entity.email)
+      }
+    })
+    
+    console.log('✅ Store options created successfully!')
+    console.log('📋 Store options:', storeOptions)
+    
+    // Vérifier la structure
+    console.log('🔍 Store ID:', storeOptions.id)
+    console.log('🔍 Has state:', !!storeOptions.state)
+    console.log('🔍 Has actions:', !!storeOptions.actions)
+    console.log('🔍 Has getters:', !!storeOptions.getters)
+    
+    alert('✅ Package test completed! Check console for details.')
+    
+  } catch (error) {
+    console.error('❌ Package test failed:', error)
+    alert(`❌ Package test failed: ${error.message}`)
   }
 }
 

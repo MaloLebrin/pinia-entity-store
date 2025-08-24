@@ -8,13 +8,15 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "playwright test",
+    "test:vitest-ui": "vitest --ui"
   },
   "dependencies": {
     "pinia": "^2.1.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "jsdom": "^26.1.0",
     "typescript": "^5.3.0",
