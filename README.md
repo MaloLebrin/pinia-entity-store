@@ -1,14 +1,39 @@
 <div align="center" style="display:flex">
   <h1 style="margin-right: 2rem">Pinia-Entity-Store </h1>
-  <a href="https://pinia.vuejs.org" target="_blank" rel="noopener noreferrer">
+  <a href="https://pinia.vuejs.org" target="_blank" rel="opener noreferrer">
     <img width="50" src="https://pinia.vuejs.org/logo.svg" alt="Pinia logo">
   </a>
 </div>
 <br/>
 
+<div align="center">
+
+# 🚨 **ARCHIVED PROJECT** 🚨
+
+**This project has been abandoned and is now archived.**
+
+## ➡️ **New Repository: [entity-store-orm](https://github.com/MaloLebrin/entity-store-orm)**
+
+This project has been superseded by a new, more comprehensive solution: **[entity-store-orm](https://github.com/MaloLebrin/entity-store-orm)**.
+
+The new repository provides:
+- **ORM-agnostic architecture** with adapters for different state managers
+- **Better modularity** with separate packages for core logic and adapters
+- **Enhanced scalability** and maintainability
+- **Optimal tree-shaking** for minimal bundle sizes
+- **Multiple state manager support** (Pinia, Zustand, Redux Toolkit, etc.)
+
+### 🔄 **Migration**
+
+If you're currently using this package, we recommend migrating to the new **[entity-store-orm](https://github.com/MaloLebrin/entity-store-orm)** repository for continued support and new features.
+
+---
+
+</div>
+
 [![Node.js Package](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/MaloLebrin/pinia-entity-store/actions/workflows/npm-publish-github-packages.yml)
 
-A fully typed lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM
+~~A fully typed lightweight Pinia plugin to manage relational entities in Pinia without having to learn a whole new ORM~~
 
 ## Roadmap:
 
